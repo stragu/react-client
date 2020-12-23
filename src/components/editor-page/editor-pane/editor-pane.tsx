@@ -5,8 +5,11 @@
  */
 
 import type { Editor, EditorChange } from 'codemirror'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Controlled as ControlledCodeMirror } from 'react-codemirror2'
+import { CodemirrorBinding } from 'y-codemirror'
+import { WebsocketProvider } from 'y-websocket'
+import * as Y from 'yjs'
 import { MaxLengthWarningModal } from '../editor-modals/max-length-warning-modal'
 import type { ScrollProps } from '../synced-scroll/scroll-props'
 import { allHinters, findWordAtCursor } from './autocompletion'
@@ -82,6 +85,16 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
   )
 
   const onDrop = useOnEditorFileDrop()
+
+  useEffect(() => {
+    if (editor) {
+      const ydoc = new Y.Doc()
+      const wsProvider = new WebsocketProvider('wss://yjs-test.hedgedoc.net', 'test-room', ydoc)
+      const yText = ydoc.getText('codemirror')
+      const binding = new CodemirrorBinding(yText, editor, wsProvider.awareness)
+    }
+  }, [editor])
+
   const onMaxLengthHide = useCallback(() => setShowMaxLengthWarning(false), [])
   const codeMirrorOptions = useCodeMirrorOptions()
 
