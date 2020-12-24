@@ -94,7 +94,7 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
       const yText = ydoc.getText('codemirror')
       const binding = new CodemirrorBinding(yText, editor, wsProvider.awareness)
     }
-  }, [editor])
+  }, [editor, noteId])
 
   const onMaxLengthHide = useCallback(() => setShowMaxLengthWarning(false), [])
   const codeMirrorOptions = useCodeMirrorOptions()
