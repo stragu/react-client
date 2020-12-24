@@ -45,6 +45,7 @@ const onChange = (editor: Editor) => {
 export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMakeScrollSource }) => {
   const markdownContent = useNoteMarkdownContent()
   const maxLength = useApplicationState((state) => state.config.maxDocumentLength)
+  const noteId = useApplicationState((state) => state.noteDetails.id)
   const [showMaxLengthWarning, setShowMaxLengthWarning] = useState(false)
   const maxLengthWarningAlreadyShown = useRef(false)
   const [editor, setEditor] = useState<Editor>()
@@ -89,7 +90,7 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
   useEffect(() => {
     if (editor) {
       const ydoc = new Y.Doc()
-      const wsProvider = new WebsocketProvider('wss://yjs-test.hedgedoc.net', 'test-room', ydoc)
+      const wsProvider = new WebsocketProvider('wss://yjs-test.hedgedoc.net', noteId, ydoc)
       const yText = ydoc.getText('codemirror')
       const binding = new CodemirrorBinding(yText, editor, wsProvider.awareness)
     }
