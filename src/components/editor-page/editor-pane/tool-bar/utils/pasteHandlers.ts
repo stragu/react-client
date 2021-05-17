@@ -38,7 +38,7 @@ export const handleFilePaste = (event: PasteEvent, editor: Editor): boolean => {
   event.preventDefault()
   const files: FileList = event.clipboardData.files
   if (files && files.length >= 1) {
-    handleUpload(files[0], editor)
+    handleUpload(files[0], editor, editor.getCursor())
     return true
   }
   return false

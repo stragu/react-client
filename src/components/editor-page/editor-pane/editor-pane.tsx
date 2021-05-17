@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Editor, EditorChange, EditorConfiguration, ScrollInfo } from 'codemirror'
+import { Editor, EditorChange, EditorConfiguration, Position, ScrollInfo } from 'codemirror'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Controlled as ControlledCodeMirror } from 'react-codemirror2'
 import { useTranslation } from 'react-i18next'
@@ -21,6 +21,10 @@ import { useApplicationState } from '../../../hooks/common/use-application-state
 import './codemirror-imports'
 import { setNoteContent } from '../../../redux/note-details/methods'
 import { useNoteMarkdownContent } from '../../../hooks/common/use-note-markdown-content'
+import { store } from '../../../redux'
+import { useEditorToRendererCommunicator } from '../render-context/editor-to-renderer-communicator-context-provider'
+import { CommunicationMessageType } from '../../render-page/window-post-message-communicator/rendering-message'
+import { Logger } from '../../../utils/logger'
 
 const onChange = (editor: Editor) => {
   for (const hinter of allHinters) {
@@ -47,11 +51,40 @@ interface DropEvent {
   preventDefault: () => void
 }
 
+const regex = /(!\[[^\]]]\(https:\/\/\))/
+
+export const findImageReplacement = (
+  lines: string[],
+  lineIndex: number,
+  fallbackPosition: Position
+): [Position, Position] => {
+  const line = lines[lineIndex]
+  const regexFounds = regex.exec(line)
+  if (!regexFounds) {
+    return [fallbackPosition, fallbackPosition]
+  }
+  const startOfImageTag = line.search(regex)
+  if (startOfImageTag === -1) {
+    return [fallbackPosition, fallbackPosition]
+  }
+
+  return [
+    {
+      ch: startOfImageTag,
+      line: lineIndex
+    },
+    {
+      ch: startOfImageTag + regexFounds[0].length,
+      line: lineIndex
+    }
+  ]
+}
+
+const log = new Logger('EditorPane')
+
 export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMakeScrollSource }) => {
   const markdownContent = useNoteMarkdownContent()
   const { t } = useTranslation()
-  const maxLength = useApplicationState((state) => state.config.maxDocumentLength)
-  const smartPasteEnabled = useApplicationState((state) => state.editorConfig.smartPaste)
   const [showMaxLengthWarning, setShowMaxLengthWarning] = useState(false)
   const maxLengthWarningAlreadyShown = useRef(false)
   const [editor, setEditor] = useState<Editor>()
@@ -63,21 +96,48 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
   const [editorScroll, setEditorScroll] = useState<ScrollInfo>()
   const onEditorScroll = useCallback((editor: Editor, data: ScrollInfo) => setEditorScroll(data), [])
 
-  const onPaste = useCallback(
-    (pasteEditor: Editor, event: PasteEvent) => {
-      if (!event || !event.clipboardData) {
-        return
-      }
-      if (smartPasteEnabled) {
-        const tableInserted = handleTablePaste(event, pasteEditor)
-        if (tableInserted) {
+  const iframeCommunicator = useEditorToRendererCommunicator()
+  useEffect(
+    () =>
+      iframeCommunicator.setHandler(CommunicationMessageType.IMAGE_UPLOAD, ({ dataUri, fileName, line }) => {
+        if (!editor) {
           return
         }
-      }
-      handleFilePaste(event, pasteEditor)
-    },
-    [smartPasteEnabled]
+        if (!dataUri.startsWith('data:image/')) {
+          log.error('Received uri is no data uri and image!')
+          return
+        }
+
+        fetch(dataUri)
+          .then((result) => result.blob())
+          .then((blob) => {
+            const file = new File([blob], fileName, { type: blob.type })
+            if (line === undefined) {
+              handleUpload(file, editor, editor.getCursor(), editor.getCursor())
+            } else {
+              const lines = store.getState().noteDetails.markdownContent.split('\n')
+              const replacementCursors = findImageReplacement(lines, line, editor.getCursor())
+              const [cursorFrom, cursorTo] = replacementCursors
+              handleUpload(file, editor, cursorFrom, cursorTo)
+            }
+          })
+          .catch((error) => log.error(error))
+      }),
+    [editor, iframeCommunicator]
   )
+
+  const onPaste = useCallback((pasteEditor: Editor, event: PasteEvent) => {
+    if (!event || !event.clipboardData) {
+      return
+    }
+    if (store.getState().editorConfig.smartPaste) {
+      const tableInserted = handleTablePaste(event, pasteEditor)
+      if (tableInserted) {
+        return
+      }
+    }
+    handleFilePaste(event, pasteEditor)
+  }, [])
 
   useEffect(() => {
     if (!editor || !onScroll || !editorScroll) {
@@ -111,34 +171,26 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
     }
   }, [editor, scrollState])
 
-  const onBeforeChange = useCallback(
-    (editor: Editor, data: EditorChange, value: string) => {
-      if (value.length > maxLength && !maxLengthWarningAlreadyShown.current) {
-        setShowMaxLengthWarning(true)
-        maxLengthWarningAlreadyShown.current = true
-      }
-      if (value.length <= maxLength) {
-        maxLengthWarningAlreadyShown.current = false
-      }
-      setNoteContent(value)
-    },
-    [maxLength]
-  )
+  const onBeforeChange = useCallback((editor: Editor, data: EditorChange, value: string) => {
+    const maxLength = store.getState().config.maxDocumentLength
+    if (value.length > maxLength && !maxLengthWarningAlreadyShown.current) {
+      setShowMaxLengthWarning(true)
+      maxLengthWarningAlreadyShown.current = true
+    }
+    if (value.length <= maxLength) {
+      maxLengthWarningAlreadyShown.current = false
+    }
+    setNoteContent(value)
+  }, [])
 
-  const onEditorDidMount = useCallback(
-    (mountedEditor: Editor) => {
-      setStatusBarInfo(createStatusInfo(mountedEditor, maxLength))
-      setEditor(mountedEditor)
-    },
-    [maxLength]
-  )
+  const onCursorActivity = useCallback((editorWithActivity: Editor) => {
+    setStatusBarInfo(createStatusInfo(editorWithActivity, store.getState().config.maxDocumentLength))
+  }, [])
 
-  const onCursorActivity = useCallback(
-    (editorWithActivity: Editor) => {
-      setStatusBarInfo(createStatusInfo(editorWithActivity, maxLength))
-    },
-    [maxLength]
-  )
+  const onEditorDidMount = useCallback((mountedEditor: Editor) => {
+    onCursorActivity(mountedEditor)
+    setEditor(mountedEditor)
+  }, [onCursorActivity])
 
   const onDrop = useCallback((dropEditor: Editor, event: DropEvent) => {
     if (
@@ -156,7 +208,7 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
       const newCursor = dropEditor.coordsChar({ top, left }, 'page')
       dropEditor.setCursor(newCursor)
       const files: FileList = event.dataTransfer.files
-      handleUpload(files[0], dropEditor)
+      handleUpload(files[0], dropEditor, dropEditor.getCursor())
     }
   }, [])
 
@@ -193,7 +245,7 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
 
   return (
     <div className={'d-flex flex-column h-100 position-relative'} onMouseEnter={onMakeScrollSource}>
-      <MaxLengthWarningModal show={showMaxLengthWarning} onHide={onMaxLengthHide} maxLength={maxLength} />
+      <MaxLengthWarningModal show={showMaxLengthWarning} onHide={onMaxLengthHide} />
       <ToolBar editor={editor} />
       <ControlledCodeMirror
         className={`overflow-hidden w-100 flex-fill ${ligaturesEnabled ? '' : 'no-ligatures'}`}

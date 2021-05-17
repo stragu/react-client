@@ -35,6 +35,7 @@ import { highlightedCode } from '../markdown-it-plugins/highlighted-code'
 import { quoteExtraColor } from '../markdown-it-plugins/quote-extra-color'
 import { quoteExtra } from '../markdown-it-plugins/quote-extra'
 import { documentTableOfContents } from '../markdown-it-plugins/document-table-of-contents'
+import { imagePlaceholder } from '../markdown-it-plugins/image-placeholder'
 
 export interface ConfiguratorDetails {
   onToc: (toc: TocAst) => void
@@ -83,6 +84,7 @@ export class BasicMarkdownItConfigurator<T extends ConfiguratorDetails> {
       legacySpeakerdeckShortCode,
       AsciinemaReplacer.markdownItPlugin,
       highlightedCode,
+      imagePlaceholder,
       quoteExtraColor,
       quoteExtra('name', 'user'),
       quoteExtra('time', 'clock-o'),

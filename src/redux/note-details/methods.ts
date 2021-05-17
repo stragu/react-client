@@ -8,6 +8,7 @@ import { store } from '..'
 import { NoteDto } from '../../api/notes/types'
 import {
   NoteDetailsActionType,
+  ReplaceInMarkdownContentAction,
   SetNoteDetailsFromServerAction,
   SetNoteDocumentContentAction,
   UpdateNoteTitleByFirstHeadingAction,
@@ -34,6 +35,14 @@ export const setNoteDataFromServer = (apiResponse: NoteDto): void => {
     type: NoteDetailsActionType.SET_NOTE_DATA_FROM_SERVER,
     dto: apiResponse
   } as SetNoteDetailsFromServerAction)
+}
+
+export const replaceInMarkdownContent = (placeholder: string, replacement: string): void => {
+  store.dispatch({
+    type: NoteDetailsActionType.REPLACE_IN_MARKDOWN_CONTENT,
+    placeholder,
+    replacement
+  } as ReplaceInMarkdownContentAction)
 }
 
 /**

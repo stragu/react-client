@@ -34,6 +34,13 @@ export const uploadFile = async (noteId: string, media: Blob): Promise<UploadedM
     method: isMockMode() ? 'GET' : 'POST',
     body: isMockMode() ? undefined : media
   })
+
+  if (isMockMode()) {
+    await new Promise((resolve) => {
+      setTimeout(resolve, 3000)
+    })
+  }
+
   expectResponseCode(response, isMockMode() ? 200 : 201)
   return (await response.json()) as Promise<UploadedMedia>
 }
