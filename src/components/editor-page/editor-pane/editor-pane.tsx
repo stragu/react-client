@@ -18,6 +18,7 @@ import './editor-pane.scss'
 import type { StatusBarInfo } from './status-bar/status-bar'
 import { createStatusInfo, defaultState, StatusBar } from './status-bar/status-bar'
 import { ToolBar } from './tool-bar/tool-bar'
+import { useWebsocketUrl } from '../hooks/useWebsocketUrl'
 import { useApplicationState } from '../../../hooks/common/use-application-state'
 import './codemirror-imports'
 import { setNoteContent } from '../../../redux/note-details/methods'
@@ -52,6 +53,7 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
   const [editor, setEditor] = useState<Editor>()
   const [statusBarInfo, setStatusBarInfo] = useState<StatusBarInfo>(defaultState)
   const ligaturesEnabled = useApplicationState((state) => state.editorConfig.ligatures)
+  const wsUrl = useWebsocketUrl()
 
   const onPaste = useOnEditorPasteCallback()
   const onEditorScroll = useOnEditorScroll(onScroll)
@@ -91,7 +93,7 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
   useEffect(() => {
     if (editor) {
       const ydoc = new Y.Doc()
-      const wsProvider = new WebsocketProvider('wss://sync.hedgedoc.net', noteId, ydoc)
+      const wsProvider = new WebsocketProvider(wsUrl, noteId, ydoc)
       const yText = ydoc.getText('codemirror')
       const binding = new CodemirrorBinding(yText, editor, wsProvider.awareness)
       const persistence = new IndexeddbPersistence(`note-${noteId}`, ydoc)
@@ -105,7 +107,7 @@ export const EditorPane: React.FC<ScrollProps> = ({ scrollState, onScroll, onMak
         wsProvider.disconnectBc()
       }
     }
-  }, [editor, noteId])
+  }, [editor, noteId, wsUrl])
 
   const onMaxLengthHide = useCallback(() => setShowMaxLengthWarning(false), [])
   const codeMirrorOptions = useCodeMirrorOptions()
