@@ -9,11 +9,14 @@ import { NoteDto } from '../../api/notes/types'
 import { NoteFrontmatter } from '../../components/editor-page/note-frontmatter/note-frontmatter'
 import { initialState } from './reducers'
 import {
+  AddAliasAction,
   NoteDetailsActionType,
+  RemoveAliasAction,
   SetCheckboxInMarkdownContentAction,
   SetNoteDetailsAction,
   SetNoteDetailsFromServerAction,
   SetNoteFrontmatterFromRenderingAction,
+  SetPrimaryAliasAction,
   UpdateNoteTitleByFirstHeadingAction
 } from './types'
 
@@ -54,4 +57,34 @@ export const setCheckboxInMarkdownContent = (lineInMarkdown: number, checked: bo
     checked: checked,
     lineInMarkdown: lineInMarkdown
   } as SetCheckboxInMarkdownContentAction)
+}
+
+export const addNoteAlias = (alias: string): void => {
+  if (store.getState().noteDetails.aliases.includes(alias)) {
+    return
+  }
+  store.dispatch({
+    type: NoteDetailsActionType.ADD_ALIAS,
+    alias: alias
+  } as AddAliasAction)
+}
+
+export const removeNoteAlias = (alias: string): void => {
+  if (!store.getState().noteDetails.aliases.includes(alias)) {
+    return
+  }
+  store.dispatch({
+    type: NoteDetailsActionType.REMOVE_ALIAS,
+    alias: alias
+  } as RemoveAliasAction)
+}
+
+export const makeNoteAliasPrimary = (alias: string): void => {
+  if (!store.getState().noteDetails.aliases.includes(alias)) {
+    return
+  }
+  store.dispatch({
+    type: NoteDetailsActionType.SET_PRIMARY_ALIAS,
+    alias: alias
+  } as SetPrimaryAliasAction)
 }
