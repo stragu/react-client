@@ -70,16 +70,16 @@ export interface SetCheckboxInMarkdownContentAction extends NoteDetailsAction {
 }
 
 export interface AddAliasAction extends NoteDetailsAction {
-  type: NoteDetailsActionType.ADD_ALIAS,
+  type: NoteDetailsActionType.ADD_ALIAS
   alias: string
 }
 
 export interface RemoveAliasAction extends NoteDetailsAction {
-  type: NoteDetailsActionType.REMOVE_ALIAS,
+  type: NoteDetailsActionType.REMOVE_ALIAS
   alias: string
 }
 
 export interface SetPrimaryAliasAction extends NoteDetailsAction {
-  type: NoteDetailsActionType.SET_PRIMARY_ALIAS,
+  type: NoteDetailsActionType.SET_PRIMARY_ALIAS
   alias: string
 }
