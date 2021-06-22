@@ -19,6 +19,7 @@ import {
   SetPrimaryAliasAction,
   UpdateNoteTitleByFirstHeadingAction
 } from './types'
+import { deleteAlias, postAlias, putPrimaryAlias } from '../../api/aliases'
 
 export const setNoteMarkdownContent = (content: string): void => {
   store.dispatch({
@@ -59,30 +60,33 @@ export const setCheckboxInMarkdownContent = (lineInMarkdown: number, checked: bo
   } as SetCheckboxInMarkdownContentAction)
 }
 
-export const addNoteAlias = (alias: string): void => {
+export const addNoteAlias = async (alias: string): Promise<void> => {
   if (store.getState().noteDetails.aliases.includes(alias)) {
     return
   }
+  await postAlias(store.getState().noteDetails.id, alias)
   store.dispatch({
     type: NoteDetailsActionType.ADD_ALIAS,
     alias: alias
   } as AddAliasAction)
 }
 
-export const removeNoteAlias = (alias: string): void => {
+export const removeNoteAlias = async (alias: string): Promise<void> => {
   if (!store.getState().noteDetails.aliases.includes(alias)) {
     return
   }
+  await deleteAlias(alias)
   store.dispatch({
     type: NoteDetailsActionType.REMOVE_ALIAS,
     alias: alias
   } as RemoveAliasAction)
 }
 
-export const makeNoteAliasPrimary = (alias: string): void => {
-  if (!store.getState().noteDetails.aliases.includes(alias)) {
+export const makeNoteAliasPrimary = async (alias: string): Promise<void> => {
+  if (!store.getState().noteDetails.aliases.includes(alias) || store.getState().noteDetails.primaryAlias === alias) {
     return
   }
+  await putPrimaryAlias(alias)
   store.dispatch({
     type: NoteDetailsActionType.SET_PRIMARY_ALIAS,
     alias: alias
