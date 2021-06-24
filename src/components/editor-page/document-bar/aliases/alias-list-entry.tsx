@@ -21,18 +21,16 @@ export const AliasListEntry: React.FC<AliasListEntryProps> = ({ alias, isPrimary
   const { t } = useTranslation()
 
   const onRemoveClick = useCallback(() => {
-    removeNoteAlias(alias)
-      .catch(showErrorNotification(t('editor.modal.aliases.errorRemovingAlias')))
+    removeNoteAlias(alias).catch(showErrorNotification(t('editor.modal.aliases.errorRemovingAlias')))
   }, [])
 
   const onMakePrimaryClick = useCallback(() => {
-    makeNoteAliasPrimary(alias)
-      .catch(showErrorNotification(t('editor.modal.aliases.errorMakingPrimary')))
+    makeNoteAliasPrimary(alias).catch(showErrorNotification(t('editor.modal.aliases.errorMakingPrimary')))
   }, [])
 
   return (
     <li className={'list-group-item d-flex flex-row justify-content-between align-items-center'}>
-      { alias }
+      {alias}
       <div>
         <ShowIf condition={isPrimary}>
           <Button

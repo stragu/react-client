@@ -23,22 +23,27 @@ export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
   const primaryAlias = useApplicationState((state: ApplicationState) => state.noteDetails.primaryAlias)
 
   const addAlias = useCallback(() => {
-    addNoteAlias(newAlias).then(() => {
-      setNewAlias('')
-    }).catch(error => {
-      console.error(error)
-      setNewAliasInvalid(true)
-    })
+    addNoteAlias(newAlias)
+      .then(() => {
+        setNewAlias('')
+      })
+      .catch((error) => {
+        console.error(error)
+        setNewAliasInvalid(true)
+      })
   }, [setNewAliasInvalid, newAlias, setNewAlias])
 
-  const newAliasInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.currentTarget.value
-    if (!/^[\w-]*$/.test(newValue)) {
-      return
-    }
-    setNewAlias(newValue)
-    setNewAliasInvalid(false)
-  }, [setNewAlias, setNewAliasInvalid])
+  const newAliasInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const newValue = event.currentTarget.value
+      if (!/^[\w-]*$/.test(newValue)) {
+        return
+      }
+      setNewAlias(newValue)
+      setNewAliasInvalid(false)
+    },
+    [setNewAlias, setNewAliasInvalid]
+  )
 
   return (
     <CommonModal
@@ -52,11 +57,9 @@ export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
           <Trans i18nKey={'editor.modal.aliases.explanation'} />
         </p>
         <ul className={'list-group'}>
-          {
-            aliases.map(alias =>
-              <AliasListEntry alias={alias} isPrimary={alias === primaryAlias} key={alias} />
-            )
-          }
+          {aliases.map((alias) => (
+            <AliasListEntry alias={alias} isPrimary={alias === primaryAlias} key={alias} />
+          ))}
           <li className={'list-group-item'}>
             <form
               onSubmit={(event) => {
@@ -71,7 +74,11 @@ export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
                   isInvalid={newAliasInvalid}
                   required={true}
                 />
-                <Button variant='light' className={'text-secondary ml-2'} title={t('editor.modal.aliases.addAlias')} onClick={addAlias}>
+                <Button
+                  variant='light'
+                  className={'text-secondary ml-2'}
+                  title={t('editor.modal.aliases.addAlias')}
+                  onClick={addAlias}>
                   <ForkAwesomeIcon icon={'plus'} />
                 </Button>
               </InputGroup>
