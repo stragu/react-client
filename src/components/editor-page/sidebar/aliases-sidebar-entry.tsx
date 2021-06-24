@@ -15,7 +15,7 @@ export const AliasesSidebarEntry: React.FC<SpecificSidebarEntryProps> = ({ class
 
   return (
     <Fragment>
-      <SidebarButton hide={hide} className={className} icon={'tags'} onClick={() => setShowModal(true)}>
+      <SidebarButton hide={hide} className={className} icon={'tags'} onClick={() => setShowModal(true)} data-cy={'sidebar-btn-aliases'}>
         <Trans i18nKey={'editor.modal.aliases.title'} />
       </SidebarButton>
       <AliasesModal show={showModal} onHide={() => setShowModal(false)} />

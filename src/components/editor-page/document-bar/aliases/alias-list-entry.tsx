@@ -37,6 +37,7 @@ export const AliasListEntry: React.FC<AliasListEntryProps> = ({ alias, isPrimary
             className={'mr-2 text-warning'}
             variant='light'
             disabled={true}
+            data-cy={'alias-is-primary'}
             title={t('editor.modal.aliases.isPrimary')}>
             <ForkAwesomeIcon icon={'star'} />
           </Button>
@@ -46,7 +47,8 @@ export const AliasListEntry: React.FC<AliasListEntryProps> = ({ alias, isPrimary
             className={'mr-2'}
             variant='light'
             title={t('editor.modal.aliases.makePrimary')}
-            onClick={onMakePrimaryClick}>
+            onClick={onMakePrimaryClick}
+            data-cy={'make-alias-primary'}>
             <ForkAwesomeIcon icon={'star-o'} />
           </Button>
         </ShowIf>
@@ -54,7 +56,8 @@ export const AliasListEntry: React.FC<AliasListEntryProps> = ({ alias, isPrimary
           variant='light'
           className={'text-danger'}
           title={t('editor.modal.aliases.removeAlias')}
-          onClick={onRemoveClick}>
+          onClick={onRemoveClick}
+          data-cy={'remove-alias'}>
           <ForkAwesomeIcon icon={'times'} />
         </Button>
       </div>
