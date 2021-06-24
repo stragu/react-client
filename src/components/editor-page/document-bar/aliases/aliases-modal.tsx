@@ -36,7 +36,7 @@ export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
   const newAliasInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const newValue = event.currentTarget.value
-      if (!/^[\w-]*$/.test(newValue)) {
+      if (!/^[a-z0-9_-]*$/.test(newValue)) {
         return
       }
       setNewAlias(newValue)
