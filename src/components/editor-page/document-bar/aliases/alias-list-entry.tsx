@@ -22,11 +22,11 @@ export const AliasListEntry: React.FC<AliasListEntryProps> = ({ alias, isPrimary
 
   const onRemoveClick = useCallback(() => {
     removeNoteAlias(alias).catch(showErrorNotification(t('editor.modal.aliases.errorRemovingAlias')))
-  }, [])
+  }, [alias, t])
 
   const onMakePrimaryClick = useCallback(() => {
     makeNoteAliasPrimary(alias).catch(showErrorNotification(t('editor.modal.aliases.errorMakingPrimary')))
-  }, [])
+  }, [alias, t])
 
   return (
     <li className={'list-group-item d-flex flex-row justify-content-between align-items-center'}>
