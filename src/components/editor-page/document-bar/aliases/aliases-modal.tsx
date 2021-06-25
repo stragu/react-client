@@ -45,6 +45,7 @@ export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
   /**
    * Handles a change event of the new alias input field.
    * Validates whether the input value matches the regex for aliases and only updates the input field if this succeeds.
+   * @param event The change event from the input field.
    */
   const newAliasInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
