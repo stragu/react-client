@@ -15,6 +15,11 @@ import { ApplicationState } from '../../../../redux'
 import { ShowIf } from '../../../common/show-if/show-if'
 import { AliasListEntry } from './alias-list-entry'
 
+/**
+ * Component that holds a modal containing a list of aliases associated with the current note.
+ * @param show True when the modal should be visible, false otherwise.
+ * @param onHide Callback that is executed when the modal is dismissed.
+ */
 export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
   const { t } = useTranslation()
   const [newAlias, setNewAlias] = useState('')
@@ -22,6 +27,10 @@ export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
   const aliases = useApplicationState((state: ApplicationState) => state.noteDetails.aliases)
   const primaryAlias = useApplicationState((state: ApplicationState) => state.noteDetails.primaryAlias)
 
+  /**
+   * Handles a submission of the new alias input field.
+   * Calls the redux method and clears the input field on success or shows makes an error text visible on failure.
+   */
   const addAlias = useCallback(() => {
     addNoteAlias(newAlias)
       .then(() => {
@@ -33,6 +42,10 @@ export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
       })
   }, [setNewAliasInvalid, newAlias, setNewAlias])
 
+  /**
+   * Handles a change event of the new alias input field.
+   * Validates whether the input value matches the regex for aliases and only updates the input field if this succeeds.
+   */
   const newAliasInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const newValue = event.currentTarget.value

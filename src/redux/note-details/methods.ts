@@ -60,6 +60,11 @@ export const setCheckboxInMarkdownContent = (lineInMarkdown: number, checked: bo
   } as SetCheckboxInMarkdownContentAction)
 }
 
+/**
+ * Adds an alias to the currently loaded note.
+ * The alias is send to the server and afterwards stored in the redux store.
+ * @param alias The alias to add.
+ */
 export const addNoteAlias = async (alias: string): Promise<void> => {
   if (store.getState().noteDetails.aliases.includes(alias)) {
     return
@@ -71,6 +76,13 @@ export const addNoteAlias = async (alias: string): Promise<void> => {
   } as AddAliasAction)
 }
 
+/**
+ * Removes an alias from the currently loaded note.
+ * The alias removal is send to the server and afterwards applied to the redux store.
+ * If the alias to remove was marked as primary, the primary flag will be set to null,
+ * resulting in no alias being marked as primary.
+ * @param alias The alias to remove from the note.
+ */
 export const removeNoteAlias = async (alias: string): Promise<void> => {
   if (!store.getState().noteDetails.aliases.includes(alias)) {
     return
@@ -82,6 +94,11 @@ export const removeNoteAlias = async (alias: string): Promise<void> => {
   } as RemoveAliasAction)
 }
 
+/**
+ * Marks an alias of the currently loaded note as primary.
+ * The request will be send to the server and afterwards applied to the redux store.
+ * @param alias The alias to be marked as primary.
+ */
 export const makeNoteAliasPrimary = async (alias: string): Promise<void> => {
   if (!store.getState().noteDetails.aliases.includes(alias) || store.getState().noteDetails.primaryAlias === alias) {
     return

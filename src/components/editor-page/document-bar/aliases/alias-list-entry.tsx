@@ -17,13 +17,26 @@ export interface AliasListEntryProps {
   isPrimary: boolean
 }
 
+/**
+ * Component that shows an entry in the aliases list with buttons to remove it or mark it as primary.
+ * @param alias The alias.
+ * @param isPrimary True if this alias is the primary one for the current note, false otherwise.
+ */
 export const AliasListEntry: React.FC<AliasListEntryProps> = ({ alias, isPrimary }) => {
   const { t } = useTranslation()
 
+  /**
+   * Handles a click on the remove button.
+   * Calls the removal redux method and shows an error notification on failure.
+   */
   const onRemoveClick = useCallback(() => {
     removeNoteAlias(alias).catch(showErrorNotification(t('editor.modal.aliases.errorRemovingAlias')))
   }, [alias, t])
 
+  /**
+   * Handles a click on the "mark as primary" button.
+   * Calls the corresponding redux method and shows an error notification on failure.
+   */
   const onMakePrimaryClick = useCallback(() => {
     makeNoteAliasPrimary(alias).catch(showErrorNotification(t('editor.modal.aliases.errorMakingPrimary')))
   }, [alias, t])
