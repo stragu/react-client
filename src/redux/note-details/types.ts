@@ -69,16 +69,25 @@ export interface SetCheckboxInMarkdownContentAction extends NoteDetailsAction {
   checked: boolean
 }
 
+/**
+ * Action definition for the {@link addNoteAlias} redux method.
+ */
 export interface AddAliasAction extends NoteDetailsAction {
   type: NoteDetailsActionType.ADD_ALIAS
   alias: string
 }
 
+/**
+ * Action definition for the {@link removeNoteAlias} redux method.
+ */
 export interface RemoveAliasAction extends NoteDetailsAction {
   type: NoteDetailsActionType.REMOVE_ALIAS
   alias: string
 }
 
+/**
+ * Action definition for the {@link makeNoteAliasPrimary} redux method.
+ */
 export interface SetPrimaryAliasAction extends NoteDetailsAction {
   type: NoteDetailsActionType.SET_PRIMARY_ALIAS
   alias: string

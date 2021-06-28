@@ -17,6 +17,7 @@ import { AliasListEntry } from './alias-list-entry'
 
 /**
  * Component that holds a modal containing a list of aliases associated with the current note.
+ *
  * @param show True when the modal should be visible, false otherwise.
  * @param onHide Callback that is executed when the modal is dismissed.
  */
@@ -45,6 +46,7 @@ export const AliasesModal: React.FC<CommonModalProps> = ({ show, onHide }) => {
   /**
    * Handles a change event of the new alias input field.
    * Validates whether the input value matches the regex for aliases and only updates the input field if this succeeds.
+   *
    * @param event The change event from the input field.
    */
   const newAliasInputChange = useCallback(

@@ -12,6 +12,9 @@ import { makeNoteAliasPrimary, removeNoteAlias } from '../../../../redux/note-de
 import { showErrorNotification } from '../../../../redux/ui-notifications/methods'
 import { ShowIf } from '../../../common/show-if/show-if'
 
+/**
+ * Properties for the {@link AliasListEntry} component.
+ */
 export interface AliasListEntryProps {
   alias: string
   isPrimary: boolean
@@ -19,6 +22,7 @@ export interface AliasListEntryProps {
 
 /**
  * Component that shows an entry in the aliases list with buttons to remove it or mark it as primary.
+ *
  * @param alias The alias.
  * @param isPrimary True if this alias is the primary one for the current note, false otherwise.
  */
