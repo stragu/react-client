@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Editor } from 'codemirror'
-import { EmojiClickEventDetail } from 'emoji-picker-element/shared'
 import { createNumberRangeArray } from '../../../../common/number-range/number-range'
 import { getEmojiShortCode } from './emojiUtils'
+import type { Editor } from 'codemirror'
+import type { EmojiClickEventDetail } from 'emoji-picker-element/shared'
 
 export const makeSelectionBold = (editor: Editor): void => wrapTextWith(editor, '**')
 export const makeSelectionItalic = (editor: Editor): void => wrapTextWith(editor, '*')

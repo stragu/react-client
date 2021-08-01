@@ -14,7 +14,6 @@ import { setNoteFrontmatter, updateNoteTitleByFirstHeading } from '../../redux/n
 import { MotdBanner } from '../common/motd-banner/motd-banner'
 import { ShowIf } from '../common/show-if/show-if'
 import { AppBar, AppBarMode } from '../editor-page/app-bar/app-bar'
-import { EditorPagePathParams } from '../editor-page/editor-page'
 import { useLoadNoteFromServer } from '../editor-page/hooks/useLoadNoteFromServer'
 import { RenderIframe } from '../editor-page/renderer-pane/render-iframe'
 import { DocumentInfobar } from './document-infobar'
@@ -23,6 +22,7 @@ import { LoadingNoteAlert } from './LoadingNoteAlert'
 import { RendererType } from '../render-page/rendering-message'
 import { useApplicationState } from '../../hooks/common/use-application-state'
 import { IframeEditorToRendererCommunicatorContextProvider } from '../editor-page/render-context/iframe-editor-to-renderer-communicator-context-provider'
+import type { EditorPagePathParams } from '../editor-page/editor-page'
 
 export const DocumentReadOnlyPage: React.FC = () => {
   useTranslation()

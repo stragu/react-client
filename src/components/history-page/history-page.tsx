@@ -11,9 +11,9 @@ import { HistoryContent } from './history-content/history-content'
 import { HistoryToolbar, HistoryToolbarState, initToolbarState } from './history-toolbar/history-toolbar'
 import { sortAndFilterEntries } from './utils'
 import { refreshHistoryState } from '../../redux/history/methods'
-import { HistoryEntry } from '../../redux/history/types'
 import { showErrorNotification } from '../../redux/ui-notifications/methods'
 import { useApplicationState } from '../../hooks/common/use-application-state'
+import type { HistoryEntry } from '../../redux/history/types'
 
 export const HistoryPage: React.FC = () => {
   const { t } = useTranslation()

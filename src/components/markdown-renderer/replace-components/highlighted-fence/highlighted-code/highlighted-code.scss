@@ -5,10 +5,10 @@
  */
 
 .markdown-body {
-  @import '../../../../../../node_modules/highlight.js/styles/github';
+  @import '../../../../../../node_modules/highlight.js/styles/github.css';
 
   body.dark & {
-    @import '../../../../../../node_modules/highlight.js/styles/tomorrow-night-blue';
+    @import '../../../../../../node_modules/highlight.js/styles/tomorrow-night-blue.css';
   }
 
   code.hljs {

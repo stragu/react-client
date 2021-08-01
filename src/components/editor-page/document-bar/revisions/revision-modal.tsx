@@ -10,8 +10,6 @@ import ReactDiffViewer, { DiffMethod } from 'react-diff-viewer'
 import { Trans, useTranslation } from 'react-i18next'
 import { useParams } from 'react-router'
 import { getAllRevisions, getRevision } from '../../../../api/revisions'
-import { Revision, RevisionListEntry } from '../../../../api/revisions/types'
-import { UserResponse } from '../../../../api/users/types'
 import { useIsDarkModeActivated } from '../../../../hooks/common/use-is-dark-mode-activated'
 import { useNoteMarkdownContent } from '../../../../hooks/common/use-note-markdown-content'
 import { CommonModal } from '../../../common/modals/common-modal'
@@ -19,6 +17,8 @@ import { ShowIf } from '../../../common/show-if/show-if'
 import { RevisionModalListEntry } from './revision-modal-list-entry'
 import './revision-modal.scss'
 import { downloadRevision, getUserDataForRevision } from './utils'
+import type { Revision, RevisionListEntry } from '../../../../api/revisions/types'
+import type { UserResponse } from '../../../../api/users/types'
 
 export interface PermissionsModalProps {
   show: boolean

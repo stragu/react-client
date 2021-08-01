@@ -7,8 +7,8 @@
 import React, { ReactElement, useCallback, useEffect, useRef, useState } from 'react'
 import { ShowIf } from '../../common/show-if/show-if'
 import { SplitDivider } from './split-divider/split-divider'
-import './splitter.scss'
 import { useAdjustedRelativeSplitValue } from './hooks/use-adjusted-relative-split-value'
+import './splitter.scss'
 
 export interface SplitterProps {
   left: ReactElement

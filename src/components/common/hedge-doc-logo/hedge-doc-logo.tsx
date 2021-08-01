@@ -5,7 +5,7 @@
  */
 
 import React from 'react'
-import { ReactComponent as LogoColor } from './logo_color.svg'
+import LogoColor from './logo_color.svg'
 
 export enum HedgeDocLogoSize {
   SMALL = 32,
@@ -18,5 +18,5 @@ export interface HedgeDocLogoProps {
 }
 
 export const HedgeDocLogo: React.FC<HedgeDocLogoProps> = ({ size = HedgeDocLogoSize.MEDIUM }) => {
-  return <LogoColor className={'w-auto'} title={'HedgeDoc logo with text'} style={{ height: size }} />
+  return <LogoColor className={'w-auto'} data-title={'HedgeDoc logo with text'} style={{ height: size }} />
 }

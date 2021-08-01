@@ -5,13 +5,13 @@
  */
 
 import { Picker } from 'emoji-picker-element'
-import { CustomEmoji, EmojiClickEvent, EmojiClickEventDetail } from 'emoji-picker-element/shared'
 import React, { useEffect, useRef } from 'react'
 import { useClickAway } from 'react-use'
 import { useIsDarkModeActivated } from '../../../../../hooks/common/use-is-dark-mode-activated'
 import './emoji-picker.scss'
 import forkawesomeIcon from './forkawesome.png'
 import { ForkAwesomeIcons } from './icon-names'
+import type { CustomEmoji, EmojiClickEvent, EmojiClickEventDetail } from 'emoji-picker-element/shared'
 
 export interface EmojiPickerProps {
   show: boolean
@@ -26,7 +26,7 @@ export const customEmojis: CustomEmoji[] = Object.keys(ForkAwesomeIcons).map((na
   category: 'ForkAwesome'
 }))
 
-export const EMOJI_DATA_PATH = '/static/js/emoji-data.json'
+export const EMOJI_DATA_PATH = '/static/emojibase/data.json'
 
 export const emojiPickerConfig = {
   customEmoji: customEmojis,

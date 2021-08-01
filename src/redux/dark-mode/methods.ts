@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { store } from '..'
+import { store } from '../index'
 import { DarkModeConfig, DarkModeConfigActionType, SetDarkModeConfigAction } from './types'
 
 export const setDarkMode = (darkMode: boolean): void => {

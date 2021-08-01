@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import MarkdownIt from 'markdown-it/lib'
 import Token from 'markdown-it/lib/token'
+import type MarkdownIt from 'markdown-it/lib'
 
 export interface LineMarkers {
   startLine: number

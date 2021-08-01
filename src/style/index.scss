@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-@import "variables";
-@import "variables.light";
+@import "./variables";
+@import "./variables.light";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import '../../node_modules/react-bootstrap-typeahead/css/Typeahead';
-@import "../../node_modules/@fontsource/source-sans-pro/index";
+@import "../../node_modules/@fontsource/source-sans-pro/index.css";
 @import "../../node_modules/twemoji-colr-font/twemoji";
-@import '../../node_modules/fork-awesome/css/fork-awesome.min';
+@import '../../node_modules/fork-awesome/css/fork-awesome.min.css';
 
 .text-black, body.dark .text-black {
   color: $black;

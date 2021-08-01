@@ -5,7 +5,7 @@
  */
 
 import { RendererStatus, RendererStatusActions, RendererStatusActionType } from './types'
-import { Reducer } from 'redux'
+import type { Reducer } from 'redux'
 
 const initialState: RendererStatus = {
   rendererReady: false

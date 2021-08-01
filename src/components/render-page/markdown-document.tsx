@@ -4,19 +4,19 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TocAst } from 'markdown-it-toc-done-right'
 import React, { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react'
 import useResizeObserver from 'use-resize-observer'
-import { NoteFrontmatter } from '../editor-page/note-frontmatter/note-frontmatter'
 import { YamlArrayDeprecationAlert } from '../editor-page/renderer-pane/yaml-array-deprecation-alert'
 import { useSyncedScrolling } from '../editor-page/synced-scroll/hooks/use-synced-scrolling'
-import { ScrollProps } from '../editor-page/synced-scroll/scroll-props'
 import { BasicMarkdownRenderer } from '../markdown-renderer/basic-markdown-renderer'
-import { ImageClickHandler } from '../markdown-renderer/replace-components/image/image-replacer'
 import './markdown-document.scss'
 import { WidthBasedTableOfContents } from './width-based-table-of-contents'
 import { ShowIf } from '../common/show-if/show-if'
 import { useApplicationState } from '../../hooks/common/use-application-state'
+import type { TocAst } from 'markdown-it-toc-done-right'
+import type { NoteFrontmatter } from '../editor-page/note-frontmatter/note-frontmatter'
+import type { ScrollProps } from '../editor-page/synced-scroll/scroll-props'
+import type { ImageClickHandler } from '../markdown-renderer/replace-components/image/image-replacer'
 
 export interface RendererProps extends ScrollProps {
   onFirstHeadingChange?: (firstHeading: string | undefined) => void

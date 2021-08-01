@@ -13,7 +13,7 @@ import {
   UiNotificationButton
 } from './types'
 import { DateTime } from 'luxon'
-import { IconName } from '../../components/common/fork-awesome/types'
+import type { IconName } from '../../components/common/fork-awesome/types'
 
 export const DEFAULT_DURATION_IN_SECONDS = 10
 

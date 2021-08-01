@@ -5,7 +5,7 @@
  */
 
 import { RefObject, useCallback, useRef } from 'react'
-import { IframeEditorToRendererCommunicator } from '../../../render-page/iframe-editor-to-renderer-communicator'
+import type { IframeEditorToRendererCommunicator } from '../../../render-page/iframe-editor-to-renderer-communicator'
 
 export const useOnIframeLoad = (
   frameReference: RefObject<HTMLIFrameElement>,

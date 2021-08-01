@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { UserResponse } from '../users/types'
 import { defaultFetchConfig, expectResponseCode, getApiUrl } from '../utils'
 import { isMockMode } from '../../utils/test-modes'
+import type { UserResponse } from '../users/types'
 
 export const getMe = async (): Promise<UserResponse> => {
   const response = await fetch(getApiUrl() + `me${isMockMode() ? '-get' : ''}`, {
@@ -24,7 +24,6 @@ export const updateDisplayName = async (displayName: string): Promise<void> => {
       name: displayName
     })
   })
-
   expectResponseCode(response)
 }
 
@@ -37,7 +36,6 @@ export const changePassword = async (oldPassword: string, newPassword: string): 
       newPassword
     })
   })
-
   expectResponseCode(response)
 }
 
@@ -46,6 +44,5 @@ export const deleteUser = async (): Promise<void> => {
     ...defaultFetchConfig,
     method: 'DELETE'
   })
-
   expectResponseCode(response)
 }

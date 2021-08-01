@@ -7,12 +7,12 @@
 import React, { useCallback, useMemo } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { SidebarButton } from './sidebar-button'
-import { SpecificSidebarEntryProps } from './types'
 import { useParams } from 'react-router-dom'
-import { EditorPagePathParams } from '../editor-page'
 import { toggleHistoryEntryPinning } from '../../../redux/history/methods'
 import { showErrorNotification } from '../../../redux/ui-notifications/methods'
 import { useApplicationState } from '../../../hooks/common/use-application-state'
+import type { SpecificSidebarEntryProps } from './types'
+import type { EditorPagePathParams } from '../editor-page'
 
 export const PinNoteSidebarEntry: React.FC<SpecificSidebarEntryProps> = ({ className, hide }) => {
   const { t } = useTranslation()

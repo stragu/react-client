@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Editor } from 'codemirror'
 import { convertClipboardTableToMarkdown, isTable } from '../../table-extractor'
 import { handleUpload } from '../../upload-handler'
 import { insertAtCursor } from './toolbarButtonUtils'
 import { isCursorInCodefence } from './codefenceDetection'
+import type { Editor } from 'codemirror'
 
 type ClipboardDataFormats = 'text' | 'url' | 'text/plain' | 'text/uri-list' | 'text/html'
 

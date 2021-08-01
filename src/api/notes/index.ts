@@ -5,8 +5,8 @@
  */
 
 import { defaultFetchConfig, expectResponseCode, getApiUrl } from '../utils'
-import { NoteDto } from './types'
 import { isMockMode } from '../../utils/test-modes'
+import type { NoteDto } from './types'
 
 export const getNote = async (noteId: string): Promise<NoteDto> => {
   // The "-get" suffix is necessary, because in our mock api (filesystem) the note id might already be a folder.

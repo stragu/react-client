@@ -5,8 +5,8 @@
  */
 
 import { Mock } from 'ts-mockery'
-import { Editor } from 'codemirror'
 import { isCursorInCodefence } from './codefenceDetection'
+import type { Editor } from 'codemirror'
 
 Mock.configure('jest')
 

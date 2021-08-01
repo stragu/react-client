@@ -5,10 +5,10 @@
  */
 
 import { Element, isTag } from 'domhandler'
-import MarkdownIt from 'markdown-it'
 import mathJax from 'markdown-it-mathjax'
 import React from 'react'
 import { ComponentReplacer } from '../ComponentReplacer'
+import type MarkdownIt from 'markdown-it'
 import './katex.scss'
 
 /**

@@ -4,16 +4,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import CodeMirror from 'codemirror'
 import React, { Fragment, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
 import { ForkAwesomeIcon } from '../../../../common/fork-awesome/fork-awesome-icon'
 import { addEmoji } from '../utils/toolbarButtonUtils'
 import { EmojiPicker } from './emoji-picker'
+import type { Editor } from 'codemirror'
 
 export interface EmojiPickerButtonProps {
-  editor: CodeMirror.Editor
+  editor: Editor
 }
 
 export const EmojiPickerButton: React.FC<EmojiPickerButtonProps> = ({ editor }) => {

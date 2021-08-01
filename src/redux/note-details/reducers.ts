@@ -5,7 +5,6 @@
  */
 
 import { DateTime } from 'luxon'
-import { Reducer } from 'redux'
 import {
   NoteFrontmatter,
   NoteTextDirection,
@@ -13,6 +12,7 @@ import {
 } from '../../components/editor-page/note-frontmatter/note-frontmatter'
 import { NoteDetails, NoteDetailsActions, NoteDetailsActionType } from './types'
 import { noteDtoToNoteDetails } from '../../api/notes/dto-methods'
+import type { Reducer } from 'redux'
 
 export const initialState: NoteDetails = {
   markdownContent: '',

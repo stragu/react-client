@@ -4,9 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { EditorConfiguration } from 'codemirror'
-import { store } from '..'
-import { EditorMode } from '../../components/editor-page/app-bar/editor-view-mode'
+import { store } from '../index'
 import {
   EditorConfig,
   EditorConfigActionType,
@@ -16,6 +14,8 @@ import {
   SetEditorSyncScrollAction,
   SetEditorViewModeAction
 } from './types'
+import type { EditorConfiguration } from 'codemirror'
+import type { EditorMode } from '../../components/editor-page/app-bar/editor-view-mode'
 
 export const loadFromLocalStorage = (): EditorConfig | undefined => {
   try {

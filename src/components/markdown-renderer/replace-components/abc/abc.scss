@@ -5,7 +5,7 @@
  */
 
 .abcjs-score {
-  @import "../../../../style/variables.scss";
+  @import "../../../../style/variables";
 
   &, text {
     font-family: $font-family-base;

@@ -7,7 +7,6 @@
 import { useCallback } from 'react'
 import { AbcReplacer } from '../replace-components/abc/abc-replacer'
 import { AsciinemaReplacer } from '../replace-components/asciinema/asciinema-replacer'
-import { ComponentReplacer } from '../replace-components/ComponentReplacer'
 import { CsvReplacer } from '../replace-components/csv/csv-replacer'
 import { FlowchartReplacer } from '../replace-components/flow/flowchart-replacer'
 import { GistReplacer } from '../replace-components/gist/gist-replacer'
@@ -25,6 +24,7 @@ import { TaskCheckedChangeHandler, TaskListReplacer } from '../replace-component
 import { VegaReplacer } from '../replace-components/vega-lite/vega-replacer'
 import { VimeoReplacer } from '../replace-components/vimeo/vimeo-replacer'
 import { YoutubeReplacer } from '../replace-components/youtube/youtube-replacer'
+import type { ComponentReplacer } from '../replace-components/ComponentReplacer'
 
 /**
  * Provides a function that creates a list of {@link ComponentReplacer component replacer} instances.

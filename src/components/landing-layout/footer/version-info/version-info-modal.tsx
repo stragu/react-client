@@ -10,8 +10,8 @@ import { Modal, Row } from 'react-bootstrap'
 import { VersionInfoModalColumn } from './version-info-modal-column'
 import frontendVersion from '../../../../version.json'
 import links from '../../../../links.json'
-import { BackendVersion } from '../../../../api/config/types'
 import { useApplicationState } from '../../../../hooks/common/use-application-state'
+import type { BackendVersion } from '../../../../api/config/types'
 
 export const VersionInfoModal: React.FC<CommonModalProps> = ({ onHide, show }) => {
   const serverVersion: BackendVersion = useApplicationState((state) => state.config.version)

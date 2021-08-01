@@ -4,8 +4,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element } from 'domhandler'
-import MarkdownIt from 'markdown-it'
 import markdownItRegex from 'markdown-it-regex'
 import React from 'react'
 import { ComponentReplacer } from '../ComponentReplacer'
@@ -15,6 +13,8 @@ import { GistFrame } from './gist-frame'
 import preview from './gist-preview.png'
 import { replaceGistLink } from './replace-gist-link'
 import { replaceLegacyGistShortCode } from './replace-legacy-gist-short-code'
+import type { Element } from 'domhandler'
+import type MarkdownIt from 'markdown-it'
 
 /**
  * Detects "app-gist" tags and renders them as gist frames.

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { store } from '..'
+import { store } from '../index'
 import { ClearUserAction, SetUserAction, UserActionType, UserState } from './types'
 
 export const setUser: (state: UserState) => void = (state: UserState) => {

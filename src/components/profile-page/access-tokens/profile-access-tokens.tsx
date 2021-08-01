@@ -9,12 +9,12 @@ import React, { ChangeEvent, FormEvent, Fragment, useCallback, useEffect, useMem
 import { Button, Card, Col, Form, ListGroup, Modal, Row } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { deleteAccessToken, getAccessTokenList, postNewAccessToken } from '../../../api/tokens'
-import { AccessToken } from '../../../api/tokens/types'
 import { CopyableField } from '../../common/copyable/copyable-field/copyable-field'
 import { IconButton } from '../../common/icon-button/icon-button'
 import { CommonModal } from '../../common/modals/common-modal'
 import { DeletionModal } from '../../common/modals/deletion-modal'
 import { ShowIf } from '../../common/show-if/show-if'
+import type { AccessToken } from '../../../api/tokens/types'
 
 export const ProfileAccessTokens: React.FC = () => {
   const { t } = useTranslation()

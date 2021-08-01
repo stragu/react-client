@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Editor, Position } from 'codemirror'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ShowIf } from '../../../common/show-if/show-if'
 import './status-bar.scss'
+import type { Editor, Position } from 'codemirror'
 
 export interface StatusBarInfo {
   position: Position

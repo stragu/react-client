@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Reducer } from 'redux'
-import { Config } from '../../api/config/types'
 import { ConfigActions, ConfigActionType } from './types'
+import type { Reducer } from 'redux'
+import type { Config } from '../../api/config/types'
 
 export const initialState: Config = {
   allowAnonymous: true,

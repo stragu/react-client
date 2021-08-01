@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element } from 'domhandler'
 import React from 'react'
 import { ComponentReplacer } from '../ComponentReplacer'
 import { VegaChart } from './vega-chart'
+import type { Element } from 'domhandler'
 
 /**
  * Detects code blocks with 'vega-lite' as language and renders them with Vega.

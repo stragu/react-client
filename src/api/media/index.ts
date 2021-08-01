@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { ImageProxyResponse } from '../../components/markdown-renderer/replace-components/image/types'
 import { isMockMode } from '../../utils/test-modes'
 import { defaultFetchConfig, expectResponseCode, getApiUrl } from '../utils'
+import type { ImageProxyResponse } from '../../components/markdown-renderer/replace-components/image/types'
 
 export const getProxiedUrl = async (imageUrl: string): Promise<ImageProxyResponse> => {
   const response = await fetch(getApiUrl() + 'media/proxy', {

@@ -5,8 +5,8 @@
  */
 
 import { RefObject, useCallback } from 'react'
-import { LineMarkerPosition } from '../../../markdown-renderer/types'
-import { ScrollState } from '../scroll-props'
+import type { LineMarkerPosition } from '../../../markdown-renderer/types'
+import type { ScrollState } from '../scroll-props'
 
 export const useOnUserScroll = (
   lineMarks: LineMarkerPosition[] | undefined,

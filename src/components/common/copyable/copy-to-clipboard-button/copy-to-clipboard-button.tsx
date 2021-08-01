@@ -6,10 +6,10 @@
 
 import React, { Fragment, useRef } from 'react'
 import { Button } from 'react-bootstrap'
-import { Variant } from 'react-bootstrap/types'
 import { useTranslation } from 'react-i18next'
 import { ForkAwesomeIcon } from '../../fork-awesome/fork-awesome-icon'
 import { CopyOverlay } from '../copy-overlay'
+import type { Variant } from 'react-bootstrap/types'
 
 export interface CopyToClipboardButtonProps {
   content: string

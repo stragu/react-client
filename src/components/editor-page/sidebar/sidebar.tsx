@@ -14,9 +14,9 @@ import { PermissionsSidebarEntry } from './permissions-sidebar-entry'
 import { PinNoteSidebarEntry } from './pin-note-sidebar-entry'
 import { RevisionSidebarEntry } from './revision-sidebar-entry'
 import { ShareSidebarEntry } from './share-sidebar-entry'
-import './style/theme.scss'
 import { DocumentSidebarMenuSelection } from './types'
 import { UsersOnlineSidebarMenu } from './users-online-sidebar-menu/users-online-sidebar-menu'
+import './style/theme.scss'
 
 export const Sidebar: React.FC = () => {
   const sideBarRef = useRef<HTMLDivElement>(null)

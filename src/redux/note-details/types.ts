@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { DateTime } from 'luxon'
-import { Action } from 'redux'
-import { NoteFrontmatter } from '../../components/editor-page/note-frontmatter/note-frontmatter'
-import { NoteDto } from '../../api/notes/types'
+import type { DateTime } from 'luxon'
+import type { Action } from 'redux'
+import type { NoteFrontmatter } from '../../components/editor-page/note-frontmatter/note-frontmatter'
+import type { NoteDto } from '../../api/notes/types'
 
 export enum NoteDetailsActionType {
   SET_DOCUMENT_CONTENT = 'note-details/set',

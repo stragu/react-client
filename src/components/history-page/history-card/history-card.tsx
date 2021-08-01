@@ -10,9 +10,9 @@ import { Badge, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ForkAwesomeIcon } from '../../common/fork-awesome/fork-awesome-icon'
 import { EntryMenu } from '../entry-menu/entry-menu'
-import { HistoryEntryProps, HistoryEventHandlers } from '../history-content/history-content'
 import { PinButton } from '../pin-button/pin-button'
 import { formatHistoryDate } from '../utils'
+import type { HistoryEntryProps, HistoryEventHandlers } from '../history-content/history-content'
 import './history-card.scss'
 
 export const HistoryCard: React.FC<HistoryEntryProps & HistoryEventHandlers> = ({

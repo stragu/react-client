@@ -8,10 +8,10 @@ import equal from 'fast-deep-equal'
 import { useEffect, useRef } from 'react'
 import { store } from '../../../redux'
 import { useParams } from 'react-router-dom'
-import { EditorPagePathParams } from '../editor-page'
 import { HistoryEntry, HistoryEntryOrigin } from '../../../redux/history/types'
 import { updateLocalHistoryEntry } from '../../../redux/history/methods'
 import { useApplicationState } from '../../../hooks/common/use-application-state'
+import type { EditorPagePathParams } from '../editor-page'
 
 export const useUpdateLocalHistoryEntry = (updateReady: boolean): void => {
   const { id } = useParams<EditorPagePathParams>()
@@ -30,7 +30,7 @@ export const useUpdateLocalHistoryEntry = (updateReady: boolean): void => {
       return
     }
     const history = store.getState().history
-    const entry: HistoryEntry = history.find((entry) => entry.identifier === id) ?? {
+    const entry: HistoryEntry = history.find((entry: HistoryEntry) => entry.identifier === id) ?? {
       identifier: id,
       title: '',
       pinStatus: false,

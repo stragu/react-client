@@ -6,7 +6,7 @@
 
 import React, { ReactElement } from 'react'
 import { ForkAwesomeIcon, ForkAwesomeIconProps } from './fork-awesome-icon'
-import { IconSize } from './types'
+import type { IconSize } from './types'
 
 export interface ForkAwesomeStackProps {
   size?: IconSize

@@ -8,13 +8,13 @@ import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react
 import { useApplicationState } from '../../../hooks/common/use-application-state'
 import { useIsDarkModeActivated } from '../../../hooks/common/use-is-dark-mode-activated'
 import { isTestMode } from '../../../utils/test-modes'
-import { RendererProps } from '../../render-page/markdown-document'
-import { ImageDetails, RendererType } from '../../render-page/rendering-message'
 import { useIFrameEditorToRendererCommunicator } from '../render-context/iframe-editor-to-renderer-communicator-context-provider'
-import { ScrollState } from '../synced-scroll/scroll-props'
 import { useOnIframeLoad } from './hooks/use-on-iframe-load'
 import { ShowOnPropChangeImageLightbox } from './show-on-prop-change-image-lightbox'
 import { setRendererStatus } from '../../../redux/renderer-status/methods'
+import type { RendererProps } from '../../render-page/markdown-document'
+import type { ImageDetails, RendererType } from '../../render-page/rendering-message'
+import type { ScrollState } from '../synced-scroll/scroll-props'
 
 export interface RenderIframeProps extends RendererProps {
   rendererType: RendererType

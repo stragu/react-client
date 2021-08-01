@@ -5,9 +5,9 @@
  */
 
 import yaml from 'js-yaml'
-import MarkdownIt from 'markdown-it'
 import frontmatter from 'markdown-it-front-matter'
-import { RawNoteFrontmatter } from '../../editor-page/note-frontmatter/note-frontmatter'
+import type MarkdownIt from 'markdown-it'
+import type { RawNoteFrontmatter } from '../../editor-page/note-frontmatter/note-frontmatter'
 
 interface FrontmatterPluginOptions {
   onParseError: (error: boolean) => void

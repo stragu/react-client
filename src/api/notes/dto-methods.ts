@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { NoteDto } from './types'
-import { NoteDetails } from '../../redux/note-details/types'
 import { DateTime } from 'luxon'
 import { initialState } from '../../redux/note-details/reducers'
+import type { NoteDto } from './types'
+import type { NoteDetails } from '../../redux/note-details/types'
 
 export const noteDtoToNoteDetails = (note: NoteDto): NoteDetails => {
   return {

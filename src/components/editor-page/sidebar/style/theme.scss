@@ -9,13 +9,13 @@ body.dark {
   $entry-hover-bg: lighten($body-bg, 10%);
   $sidebar-menu-bg: $body-bg;
   $sidebar-menu-shadow: #1d1d1d;
-  @import "colors";
+  @import "./colors";
 }
 
 @import "../../../../style/variables.light";
 $entry-hover-bg: darken($body-bg, 10%);
 $sidebar-menu-bg: $body-bg;
 $sidebar-menu-shadow: #bbbbbb;
-@import "colors";
+@import "./colors";
 
-@import "layout";
+@import "./layout";

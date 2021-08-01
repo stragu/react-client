@@ -19,8 +19,6 @@ import { MarkdownItParserDebugger } from '../markdown-it-plugins/parser-debugger
 import { spoilerContainer } from '../markdown-it-plugins/spoiler-container'
 import { tasksLists } from '../markdown-it-plugins/tasks-lists'
 import { twitterEmojis } from '../markdown-it-plugins/twitter-emojis'
-import { RawNoteFrontmatter } from '../../editor-page/note-frontmatter/note-frontmatter'
-import { TocAst } from 'markdown-it-toc-done-right'
 import { LineMarkers, lineNumberMarker } from '../replace-components/linemarker/line-number-marker'
 import { plantumlWithError } from '../markdown-it-plugins/plantuml'
 import { headlineAnchors } from '../markdown-it-plugins/headline-anchors'
@@ -37,6 +35,8 @@ import { quoteExtraColor } from '../markdown-it-plugins/quote-extra-color'
 import { quoteExtra } from '../markdown-it-plugins/quote-extra'
 import { documentTableOfContents } from '../markdown-it-plugins/document-table-of-contents'
 import { frontmatterExtract } from '../markdown-it-plugins/frontmatter'
+import type { RawNoteFrontmatter } from '../../editor-page/note-frontmatter/note-frontmatter'
+import type { TocAst } from 'markdown-it-toc-done-right'
 
 export interface ConfiguratorDetails {
   useFrontmatter: boolean

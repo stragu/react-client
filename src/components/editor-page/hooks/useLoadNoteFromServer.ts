@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { getNote } from '../../../api/notes'
 import { setNoteDataFromServer } from '../../../redux/note-details/methods'
-import { EditorPagePathParams } from '../editor-page'
+import type { EditorPagePathParams } from '../editor-page'
 
 export const useLoadNoteFromServer = (): [boolean, boolean] => {
   const { id } = useParams<EditorPagePathParams>()

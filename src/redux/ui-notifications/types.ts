@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Action } from 'redux'
-import { DateTime } from 'luxon'
-import { IconName } from '../../components/common/fork-awesome/types'
+import type { Action } from 'redux'
+import type { DateTime } from 'luxon'
+import type { IconName } from '../../components/common/fork-awesome/types'
 
 export enum UiNotificationActionType {
   DISPATCH_NOTIFICATION = 'notification/dispatch',

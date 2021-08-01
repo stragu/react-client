@@ -5,16 +5,16 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { ScrollState } from '../editor-page/synced-scroll/scroll-props'
 import { BaseConfiguration, RendererType } from './rendering-message'
 import { setDarkMode } from '../../redux/dark-mode/methods'
-import { NoteFrontmatter } from '../editor-page/note-frontmatter/note-frontmatter'
 import { setNoteFrontmatter } from '../../redux/note-details/methods'
-import { ImageClickHandler } from '../markdown-renderer/replace-components/image/image-replacer'
 import { useImageClickHandler } from './hooks/use-image-click-handler'
 import { MarkdownDocument } from './markdown-document'
 import { useIFrameRendererToEditorCommunicator } from '../editor-page/render-context/iframe-renderer-to-editor-communicator-context-provider'
 import { countWords } from './word-counter'
+import type { ScrollState } from '../editor-page/synced-scroll/scroll-props'
+import type { NoteFrontmatter } from '../editor-page/note-frontmatter/note-frontmatter'
+import type { ImageClickHandler } from '../markdown-renderer/replace-components/image/image-replacer'
 
 export const IframeMarkdownRenderer: React.FC = () => {
   const [markdownContent, setMarkdownContent] = useState('')

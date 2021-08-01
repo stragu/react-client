@@ -6,8 +6,8 @@
 
 import React from 'react'
 import { useApplicationState } from '../../../hooks/common/use-application-state'
-import { IconName } from '../../common/fork-awesome/types'
 import { SocialLinkButton } from './social-link-button/social-link-button'
+import type { IconName } from '../../common/fork-awesome/types'
 
 export enum OneClickType {
   'DROPBOX' = 'dropbox',

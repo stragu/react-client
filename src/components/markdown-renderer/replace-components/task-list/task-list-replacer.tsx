@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element } from 'domhandler'
 import React, { ReactElement } from 'react'
 import { ComponentReplacer } from '../ComponentReplacer'
+import type { Element } from 'domhandler'
 
 export type TaskCheckedChangeHandler = (lineInMarkdown: number, checked: boolean) => void
 

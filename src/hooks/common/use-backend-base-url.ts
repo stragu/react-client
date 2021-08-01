@@ -5,5 +5,5 @@
  */
 
 export const useBackendBaseUrl = (): string => {
-  return process.env.REACT_APP_BACKEND_BASE_URL ?? '/mock-backend/'
+  return import.meta.env.SNOWPACK_PUBLIC_BACKEND_BASE_URL ?? '/mock-backend/'
 }

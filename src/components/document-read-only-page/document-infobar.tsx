@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { DateTime } from 'luxon'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { InternalLink } from '../common/links/internal-link'
@@ -15,6 +14,7 @@ import {
 } from '../editor-page/document-bar/document-info/document-info-time-line'
 import './document-infobar.scss'
 import { useCustomizeAssetsUrl } from '../../hooks/common/use-customize-assets-url'
+import type { DateTime } from 'luxon'
 
 export interface DocumentInfobarProps {
   changedAuthor: string

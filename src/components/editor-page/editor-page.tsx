@@ -27,7 +27,6 @@ import { useViewModeShortcuts } from './hooks/useViewModeShortcuts'
 import { RenderIframe } from './renderer-pane/render-iframe'
 import { Sidebar } from './sidebar/sidebar'
 import { Splitter } from './splitter/splitter'
-import { DualScrollState, ScrollState } from './synced-scroll/scroll-props'
 import { RendererType } from '../render-page/rendering-message'
 import { useEditorModeFromUrl } from './hooks/useEditorModeFromUrl'
 import { UiNotifications } from '../notifications/ui-notifications'
@@ -35,6 +34,7 @@ import { useNotificationTest } from './use-notification-test'
 import { IframeEditorToRendererCommunicatorContextProvider } from './render-context/iframe-editor-to-renderer-communicator-context-provider'
 import { useUpdateLocalHistoryEntry } from './hooks/useUpdateLocalHistoryEntry'
 import { useApplicationState } from '../../hooks/common/use-application-state'
+import type { DualScrollState, ScrollState } from './synced-scroll/scroll-props'
 
 export interface EditorPagePathParams {
   id: string

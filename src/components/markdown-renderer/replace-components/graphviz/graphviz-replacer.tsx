@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element } from 'domhandler'
 import React from 'react'
 import { ComponentReplacer } from '../ComponentReplacer'
 import { GraphvizFrame } from './graphviz-frame'
+import type { Element } from 'domhandler'
 
 /**
  * Detects code blocks with "graphviz" as language and renders them as graphviz graph.

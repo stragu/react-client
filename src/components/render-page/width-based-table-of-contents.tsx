@@ -5,9 +5,9 @@
  */
 
 import React from 'react'
-import { TocAst } from 'markdown-it-toc-done-right'
 import { TableOfContents } from '../editor-page/table-of-contents/table-of-contents'
 import { TableOfContentsHoveringButton } from './markdown-toc-button/table-of-contents-hovering-button'
+import type { TocAst } from 'markdown-it-toc-done-right'
 
 export interface DocumentExternalTocProps {
   tocAst: TocAst

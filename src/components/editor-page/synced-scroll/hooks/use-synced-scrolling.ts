@@ -5,10 +5,10 @@
  */
 
 import React, { useCallback, useState } from 'react'
-import { LineMarkerPosition } from '../../../markdown-renderer/types'
-import { ScrollState } from '../scroll-props'
 import { useOnUserScroll } from './use-on-user-scroll'
 import { useScrollToLineMark } from './use-scroll-to-line-mark'
+import type { LineMarkerPosition } from '../../../markdown-renderer/types'
+import type { ScrollState } from '../scroll-props'
 
 export const useSyncedScrolling = (
   outerContainerRef: React.RefObject<HTMLElement>,

@@ -66,7 +66,7 @@ export const updateLocalHistoryEntry = (noteId: string, newEntry: HistoryEntry):
 }
 
 export const removeHistoryEntry = async (noteId: string): Promise<void> => {
-  const entryToDelete = store.getState().history.find((entry) => entry.identifier === noteId)
+  const entryToDelete = store.getState().history.find((entry: HistoryEntry) => entry.identifier === noteId)
   if (entryToDelete && entryToDelete.origin === HistoryEntryOrigin.REMOTE) {
     await deleteHistoryEntry(noteId)
   }
@@ -79,7 +79,7 @@ export const removeHistoryEntry = async (noteId: string): Promise<void> => {
 
 export const toggleHistoryEntryPinning = async (noteId: string): Promise<void> => {
   const state = store.getState().history
-  const entryToUpdate = state.find((entry) => entry.identifier === noteId)
+  const entryToUpdate = state.find((entry: HistoryEntry) => entry.identifier === noteId)
   if (!entryToUpdate) {
     return Promise.reject(`History entry for note '${noteId}' not found`)
   }
@@ -137,8 +137,8 @@ export const refreshHistoryState = async (): Promise<void> => {
 
 export const storeLocalHistory = (): void => {
   const history = store.getState().history
-  const localEntries = history.filter((entry) => entry.origin === HistoryEntryOrigin.LOCAL)
-  const entriesWithoutOrigin = localEntries.map((entry) => ({
+  const localEntries = history.filter((entry: HistoryEntry) => entry.origin === HistoryEntryOrigin.LOCAL)
+  const entriesWithoutOrigin = localEntries.map((entry: HistoryEntry) => ({
     ...entry,
     origin: undefined
   }))
@@ -150,7 +150,7 @@ export const storeRemoteHistory = (): Promise<void> => {
     return Promise.resolve()
   }
   const history = store.getState().history
-  const remoteEntries = history.filter((entry) => entry.origin === HistoryEntryOrigin.REMOTE)
+  const remoteEntries = history.filter((entry: HistoryEntry) => entry.origin === HistoryEntryOrigin.REMOTE)
   const remoteEntryDtos = remoteEntries.map(historyEntryToHistoryEntryPutDto)
   return postHistory(remoteEntryDtos)
 }

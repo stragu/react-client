@@ -23,6 +23,7 @@ describe('yaml frontmatter', () => {
       expect(parsedFrontmatter).not.toBe(undefined)
       if (parsedFrontmatter === undefined) {
         fail('Parsed frontmatter is undefined')
+        return
       }
       processedFrontmatter = new NoteFrontmatter(parsedFrontmatter)
     })
@@ -32,7 +33,6 @@ describe('yaml frontmatter', () => {
     if (processedFrontmatter === undefined) {
       fail('NoteFrontmatter is undefined')
     }
-
     return processedFrontmatter
   }
 

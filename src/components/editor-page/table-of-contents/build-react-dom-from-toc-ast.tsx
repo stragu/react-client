@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { TocAst } from 'markdown-it-toc-done-right'
 import React, { Fragment, ReactElement } from 'react'
 import { ShowIf } from '../../common/show-if/show-if'
 import { createJumpToMarkClickEventHandler } from '../../markdown-renderer/replace-components/link-replacer/link-replacer'
 import { tocSlugify } from './toc-slugify'
+import type { TocAst } from 'markdown-it-toc-done-right'
 
 export const buildReactDomFromTocAst = (
   toc: TocAst,

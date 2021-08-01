@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Editor, Hints } from 'codemirror'
 import { CodeBlockHinter } from './code-block'
 import { CollapsableBlockHinter } from './collapsable-block'
 import { ContainerHinter } from './container'
@@ -13,6 +12,7 @@ import { HeaderHinter } from './header'
 import { ImageHinter } from './image'
 import { LinkAndExtraTagHinter } from './link-and-extra-tag'
 import { PDFHinter } from './pdf'
+import type { Editor, Hints } from 'codemirror'
 
 interface findWordAtCursorResponse {
   start: number

@@ -7,8 +7,8 @@
 import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { Alert } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
-import { VisualizationSpec } from 'vega-embed'
 import { ShowIf } from '../../../common/show-if/show-if'
+import type { VisualizationSpec } from 'vega-embed'
 
 export interface VegaChartProps {
   code: string

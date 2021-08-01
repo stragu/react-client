@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Revision } from '../../../../api/revisions/types'
 import { getUserById } from '../../../../api/users'
-import { UserResponse } from '../../../../api/users/types'
 import { download } from '../../../common/download/download'
+import type { Revision } from '../../../../api/revisions/types'
+import type { UserResponse } from '../../../../api/users/types'
 
 export const downloadRevision = (noteId: string, revision: Revision | null): void => {
   if (!revision) {

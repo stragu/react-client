@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element } from 'domhandler'
 import React, { Fragment } from 'react'
 import { ComponentReplacer } from '../ComponentReplacer'
 import { MermaidChart } from '../mermaid/mermaid-chart'
 import { DeprecationWarning } from './deprecation-warning'
+import type { Element } from 'domhandler'
 
 /**
  * Detects code blocks with 'sequence' as language and renders them as

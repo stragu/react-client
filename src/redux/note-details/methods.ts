@@ -4,9 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { store } from '..'
-import { NoteDto } from '../../api/notes/types'
-import { NoteFrontmatter } from '../../components/editor-page/note-frontmatter/note-frontmatter'
+import { store } from '../index'
 import { initialState } from './reducers'
 import {
   NoteDetailsActionType,
@@ -16,6 +14,8 @@ import {
   SetNoteFrontmatterFromRenderingAction,
   UpdateNoteTitleByFirstHeadingAction
 } from './types'
+import type { NoteDto } from '../../api/notes/types'
+import type { NoteFrontmatter } from '../../components/editor-page/note-frontmatter/note-frontmatter'
 
 export const setNoteMarkdownContent = (content: string): void => {
   store.dispatch({

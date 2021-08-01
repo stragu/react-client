@@ -7,7 +7,7 @@
 import React, { createContext, useContext, useEffect, useMemo } from 'react'
 import { IframeRendererToEditorCommunicator } from '../../render-page/iframe-renderer-to-editor-communicator'
 import { useSelector } from 'react-redux'
-import { ApplicationState } from '../../../redux'
+import type { ApplicationState } from '../../../redux'
 
 const IFrameRendererToEditorCommunicatorContext = createContext<IframeRendererToEditorCommunicator | undefined>(
   undefined

@@ -4,8 +4,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element } from 'domhandler'
-import MarkdownIt from 'markdown-it'
 import markdownItRegex from 'markdown-it-regex'
 import React from 'react'
 import { ComponentReplacer } from '../ComponentReplacer'
@@ -13,6 +11,8 @@ import { getAttributesFromHedgeDocTag } from '../utils'
 import { replaceLegacyVimeoShortCode } from './replace-legacy-vimeo-short-code'
 import { replaceVimeoLink } from './replace-vimeo-link'
 import { VimeoFrame } from './vimeo-frame'
+import type MarkdownIt from 'markdown-it'
+import type { Element } from 'domhandler'
 
 /**
  * Detects 'app-vimeo' tags and renders them as vimeo embedding.

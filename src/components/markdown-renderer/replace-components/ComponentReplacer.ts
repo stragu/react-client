@@ -5,8 +5,8 @@
  */
 
 import { Element, isText, NodeWithChildren } from 'domhandler'
-import MarkdownIt from 'markdown-it'
-import { ReactElement } from 'react'
+import type MarkdownIt from 'markdown-it'
+import type { ReactElement } from 'react'
 
 export type ValidReactDomElement = ReactElement | string | null
 

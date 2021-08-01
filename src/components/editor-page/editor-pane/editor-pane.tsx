@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Editor, EditorChange, EditorConfiguration, ScrollInfo } from 'codemirror'
 import 'codemirror/addon/comment/comment'
 import 'codemirror/addon/dialog/dialog'
 import 'codemirror/addon/display/autorefresh'
@@ -31,7 +30,6 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Controlled as ControlledCodeMirror } from 'react-codemirror2'
 import { useTranslation } from 'react-i18next'
 import { MaxLengthWarningModal } from '../editor-modals/max-length-warning-modal'
-import { ScrollProps, ScrollState } from '../synced-scroll/scroll-props'
 import { allHinters, findWordAtCursor } from './autocompletion'
 import './editor-pane.scss'
 import { defaultKeyMap } from './key-map'
@@ -40,6 +38,8 @@ import { ToolBar } from './tool-bar/tool-bar'
 import { handleUpload } from './upload-handler'
 import { handleFilePaste, handleTablePaste, PasteEvent } from './tool-bar/utils/pasteHandlers'
 import { useApplicationState } from '../../../hooks/common/use-application-state'
+import type { Editor, EditorChange, EditorConfiguration, ScrollInfo } from 'codemirror'
+import type { ScrollProps, ScrollState } from '../synced-scroll/scroll-props'
 
 export interface EditorPaneProps {
   onContentChange: (content: string) => void

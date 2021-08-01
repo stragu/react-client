@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { store } from '..'
-import { Config } from '../../api/config/types'
+import { store } from '../index'
 import { ConfigActionType, SetConfigAction } from './types'
+import type { Config } from '../../api/config/types'
 
 export const setConfig = (state: Config): void => {
   store.dispatch({

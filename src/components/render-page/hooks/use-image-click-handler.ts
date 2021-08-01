@@ -5,8 +5,8 @@
  */
 
 import React, { useCallback } from 'react'
-import { ImageClickHandler } from '../../markdown-renderer/replace-components/image/image-replacer'
-import { IframeRendererToEditorCommunicator } from '../iframe-renderer-to-editor-communicator'
+import type { ImageClickHandler } from '../../markdown-renderer/replace-components/image/image-replacer'
+import type { IframeRendererToEditorCommunicator } from '../iframe-renderer-to-editor-communicator'
 
 export const useImageClickHandler = (iframeCommunicator: IframeRendererToEditorCommunicator): ImageClickHandler => {
   return useCallback(

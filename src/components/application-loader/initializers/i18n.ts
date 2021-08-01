@@ -17,7 +17,7 @@ export const setUpI18n = async (frontendAssetsUrl: string): Promise<void> => {
     .use(initReactI18next)
     .init({
       fallbackLng: 'en',
-      debug: process.env.NODE_ENV !== 'production',
+      debug: import.meta.env.MODE !== 'production',
       backend: {
         loadPath: `${frontendAssetsUrl}locales/{{lng}}.json`
       },

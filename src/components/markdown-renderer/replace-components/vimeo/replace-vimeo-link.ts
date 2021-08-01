@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { RegexOptions } from '../../../../external-types/markdown-it-regex/interface'
+import type { RegexOptions } from '../../../../external-types/markdown-it-regex/interface'
 
-const protocolRegex = /(?:http(?:s)?:\/\/)?/
-const domainRegex = /(?:player\.)?(?:vimeo\.com\/)(?:(?:channels|album|ondemand|groups)\/\w+\/)?(?:video\/)?/
+const protocolRegex = /(?:https?:\/\/)?/
+const domainRegex = /(?:player\.)?vimeo\.com\/(?:(?:channels|album|ondemand|groups)\/\w+\/)?(?:video\/)?/
 const idRegex = /([\d]{6,11})/
 const tailRegex = /(?:[?#].*)?/
 const vimeoVideoUrlRegex = new RegExp(

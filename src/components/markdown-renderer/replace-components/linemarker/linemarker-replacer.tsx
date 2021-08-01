@@ -4,8 +4,8 @@
  SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element } from 'domhandler'
 import { ComponentReplacer } from '../ComponentReplacer'
+import type { Element } from 'domhandler'
 
 /**
  * Detects line markers and suppresses them in the resulting DOM.

@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { store } from '..'
+import { store } from '../index'
 import { ApiUrlActionType, ApiUrlObject, SetApiUrlAction } from './types'
 
 export const setApiUrl = (state: ApiUrlObject): void => {

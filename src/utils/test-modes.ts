@@ -5,9 +5,9 @@
  */
 
 export const isTestMode = (): boolean => {
-  return !!process.env.REACT_APP_TEST_MODE
+  return !!import.meta.env.SNOWPACK_PUBLIC_TEST_MODE
 }
 
 export const isMockMode = (): boolean => {
-  return process.env.REACT_APP_BACKEND_BASE_URL === undefined
+  return import.meta.env.SNOWPACK_PUBLIC_BACKEND_BASE_URL === undefined
 }

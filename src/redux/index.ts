@@ -5,26 +5,27 @@
  */
 
 import { combineReducers, createStore, Reducer } from 'redux'
-import { Config } from '../api/config/types'
+import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction'
 import { ApiUrlReducer } from './api-url/reducers'
-import { ApiUrlObject } from './api-url/types'
 import { BannerReducer } from './banner/reducers'
-import { BannerState } from './banner/types'
 import { ConfigReducer } from './config/reducers'
 import { DarkModeConfigReducer } from './dark-mode/reducers'
-import { DarkModeConfig } from './dark-mode/types'
 import { EditorConfigReducer } from './editor/reducers'
-import { EditorConfig } from './editor/types'
 import { NoteDetailsReducer } from './note-details/reducers'
-import { NoteDetails } from './note-details/types'
 import { UserReducer } from './user/reducers'
-import { OptionalUserState } from './user/types'
-import { UiNotificationState } from './ui-notifications/types'
 import { UiNotificationReducer } from './ui-notifications/reducers'
-import { HistoryEntry } from './history/types'
 import { HistoryReducer } from './history/reducers'
 import { RendererStatusReducer } from './renderer-status/reducers'
-import { RendererStatus } from './renderer-status/types'
+import type { Config } from '../api/config/types'
+import type { ApiUrlObject } from './api-url/types'
+import type { BannerState } from './banner/types'
+import type { DarkModeConfig } from './dark-mode/types'
+import type { EditorConfig } from './editor/types'
+import type { HistoryEntry } from './history/types'
+import type { NoteDetails } from './note-details/types'
+import type { OptionalUserState } from './user/types'
+import type { RendererStatus } from './renderer-status/types'
+import type { UiNotificationState } from './ui-notifications/types'
 
 export interface ApplicationState {
   user: OptionalUserState
@@ -52,4 +53,4 @@ export const allReducers: Reducer<ApplicationState> = combineReducers<Applicatio
   rendererStatus: RendererStatusReducer
 })
 
-export const store = createStore(allReducers)
+export const store = createStore(allReducers, devToolsEnhancer({}))

@@ -8,5 +8,5 @@ import { useFrontendBaseUrl } from './use-frontend-base-url'
 
 export const useFrontendAssetsUrl = (): string => {
   const frontendBaseUrl = useFrontendBaseUrl()
-  return process.env.REACT_APP_FRONTEND_ASSETS_URL || frontendBaseUrl
+  return import.meta.env.SNOWPACK_PUBLIC_FRONTEND_ASSETS_URL || frontendBaseUrl
 }

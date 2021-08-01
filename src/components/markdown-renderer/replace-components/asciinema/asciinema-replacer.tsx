@@ -4,14 +4,14 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element } from 'domhandler'
-import MarkdownIt from 'markdown-it'
 import markdownItRegex from 'markdown-it-regex'
 import React from 'react'
 import { ComponentReplacer } from '../ComponentReplacer'
 import { getAttributesFromHedgeDocTag } from '../utils'
 import { AsciinemaFrame } from './asciinema-frame'
 import { replaceAsciinemaLink } from './replace-asciinema-link'
+import type MarkdownIt from 'markdown-it'
+import type { Element } from 'domhandler'
 
 /**
  * Detects code blocks with "asciinema" as language and renders them Asciinema frame

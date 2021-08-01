@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Reducer } from 'redux'
 import { BannerActions, BannerActionType, BannerState } from './types'
+import type { Reducer } from 'redux'
 
 export const initialState: BannerState = {
   text: undefined,

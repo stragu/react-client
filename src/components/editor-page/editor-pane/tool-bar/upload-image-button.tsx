@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Editor } from 'codemirror'
 import React, { Fragment, useCallback, useRef } from 'react'
 import { Button } from 'react-bootstrap'
 import { useTranslation } from 'react-i18next'
@@ -12,6 +11,7 @@ import { ForkAwesomeIcon } from '../../../common/fork-awesome/fork-awesome-icon'
 import { UploadInput } from '../../sidebar/upload-input'
 import { handleUpload } from '../upload-handler'
 import { supportedMimeTypes } from '../../../common/upload-image-mimetypes'
+import type { Editor } from 'codemirror'
 
 export interface UploadImageButtonProps {
   editor?: Editor

@@ -4,8 +4,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { NoteFrontmatter } from '../editor-page/note-frontmatter/note-frontmatter'
-import { ScrollState } from '../editor-page/synced-scroll/scroll-props'
 import { IframeCommunicator } from './iframe-communicator'
 import {
   BaseConfiguration,
@@ -14,6 +12,8 @@ import {
   RendererToEditorIframeMessage,
   RenderIframeMessageType
 } from './rendering-message'
+import type { NoteFrontmatter } from '../editor-page/note-frontmatter/note-frontmatter'
+import type { ScrollState } from '../editor-page/synced-scroll/scroll-props'
 
 export class IframeRendererToEditorCommunicator extends IframeCommunicator<
   RendererToEditorIframeMessage,

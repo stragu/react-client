@@ -6,13 +6,13 @@
 
 import React, { useMemo } from 'react'
 import { Button } from 'react-bootstrap'
-import { ButtonProps } from 'react-bootstrap/Button'
 import { Trans, useTranslation } from 'react-i18next'
 import { LinkContainer } from 'react-router-bootstrap'
 import { ShowIf } from '../../common/show-if/show-if'
 import { getApiUrl } from '../../../api/utils'
 import { INTERACTIVE_LOGIN_METHODS } from '../../../api/auth'
 import { useApplicationState } from '../../../hooks/common/use-application-state'
+import type { ButtonProps } from 'react-bootstrap/Button'
 
 export type SignInButtonProps = Omit<ButtonProps, 'href'>
 
