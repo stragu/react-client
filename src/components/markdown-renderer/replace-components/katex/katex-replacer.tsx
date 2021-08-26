@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Element, isTag } from 'domhandler'
+import { Element } from 'domhandler'
 import MarkdownIt from 'markdown-it'
 import mathJax from 'markdown-it-mathjax'
 import React from 'react'
@@ -12,28 +12,17 @@ import { ComponentReplacer } from '../ComponentReplacer'
 import './katex.scss'
 
 /**
- * Checks if the given node is a KaTeX block.
+ * Checks if the given node should be rendered with KaTeX.
  *
  * @param node the node to check
- * @return The given node if it is a KaTeX block element, undefined otherwise.
+ * @return {@code true} if the given node should be rendered with KaTeX. {@code false} otherwise.
  */
-const getNodeIfKatexBlock = (node: Element): Element | undefined => {
-  if (node.name !== 'p' || !node.children || node.children.length === 0) {
-    return
-  }
-  return node.children.filter(isTag).find((subnode) => {
-    return subnode.name === 'app-katex' && subnode.attribs?.inline === undefined
-  })
+const isInlineKatexTag = (node: Element): boolean => {
+  return node.attribs?.['data-katex'] === 'inline'
 }
 
-/**
- * Checks if the given node is a KaTeX inline element.
- *
- * @param node the node to check
- * @return The given node if it is a KaTeX inline element, undefined otherwise.
- */
-const getNodeIfInlineKatex = (node: Element): Element | undefined => {
-  return node.name === 'app-katex' && node.attribs?.inline !== undefined ? node : undefined
+const isBlockKatexTag = (node: Element): boolean => {
+  return node.attribs?.['data-katex'] === 'block'
 }
 
 const KaTeX = React.lazy(() => import(/* webpackChunkName: "katex" */ '@matejmazur/react-katex'))
@@ -43,20 +32,19 @@ const KaTeX = React.lazy(() => import(/* webpackChunkName: "katex" */ '@matejmaz
  */
 export class KatexReplacer extends ComponentReplacer {
   public static readonly markdownItPlugin: MarkdownIt.PluginSimple = mathJax({
-    beforeMath: '<app-katex>',
-    afterMath: '</app-katex>',
-    beforeInlineMath: '<app-katex inline>',
-    afterInlineMath: '</app-katex>',
-    beforeDisplayMath: '<app-katex>',
-    afterDisplayMath: '</app-katex>'
+    beforeMath: '<div data-katex="block">',
+    afterMath: '</div>',
+    beforeInlineMath: '<span data-katex="inline">',
+    afterInlineMath: '</span>',
+    beforeDisplayMath: '<div data-katex="block">',
+    afterDisplayMath: '</div>'
   })
 
   public getReplacement(node: Element): React.ReactElement | undefined {
-    const katex = getNodeIfKatexBlock(node) || getNodeIfInlineKatex(node)
-    if (katex?.children && katex.children[0]) {
-      const mathJaxContent = ComponentReplacer.extractTextChildContent(katex)
-      const isInline = katex.attribs?.inline !== undefined
-      return <KaTeX block={!isInline} math={mathJaxContent} errorColor={'#cc0000'} />
+    const blockKatex = isBlockKatexTag(node)
+    if (blockKatex || isInlineKatexTag(node)) {
+      const latexContent = ComponentReplacer.extractTextChildContent(node)
+      return <KaTeX block={blockKatex} math={latexContent} errorColor={'#cc0000'} />
     }
   }
 }
