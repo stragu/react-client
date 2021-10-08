@@ -8,12 +8,12 @@ import React, { FormEvent, useCallback, useState } from 'react'
 import { Alert, Button, Card, Form } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { doInternalLogin } from '../../../api/auth'
+import { doLocalLogin } from '../../../api/auth'
 import { ShowIf } from '../../common/show-if/show-if'
 import { fetchAndSetUser } from './utils'
 import { useApplicationState } from '../../../hooks/common/use-application-state'
 
-export const ViaInternal: React.FC = () => {
+export const ViaLocal: React.FC = () => {
   const { t } = useTranslation()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -22,7 +22,7 @@ export const ViaInternal: React.FC = () => {
 
   const onLoginSubmit = useCallback(
     (event: FormEvent) => {
-      doInternalLogin(username, password)
+      doLocalLogin(username, password)
         .then(() => fetchAndSetUser())
         .catch(() => setError(true))
       event.preventDefault()
@@ -37,7 +37,7 @@ export const ViaInternal: React.FC = () => {
           <Trans i18nKey='login.signInVia' values={{ service: t('login.auth.username') }} />
         </Card.Title>
         <Form onSubmit={onLoginSubmit}>
-          <Form.Group controlId='internal-username'>
+          <Form.Group controlId='local-username'>
             <Form.Control
               isInvalid={error}
               type='text'
@@ -49,7 +49,7 @@ export const ViaInternal: React.FC = () => {
             />
           </Form.Group>
 
-          <Form.Group controlId='internal-password'>
+          <Form.Group controlId='local-password'>
             <Form.Control
               isInvalid={error}
               type='password'

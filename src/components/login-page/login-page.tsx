@@ -9,7 +9,7 @@ import { Card, Col, Row } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
 import { ShowIf } from '../common/show-if/show-if'
-import { ViaInternal } from './auth/via-internal'
+import { ViaLocal } from './auth/via-local'
 import { ViaLdap } from './auth/via-ldap'
 import { OneClickType, ViaOneClick } from './auth/via-one-click'
 import { ViaOpenId } from './auth/via-openid'
@@ -53,10 +53,10 @@ export const LoginPage: React.FC = () => {
     <Fragment>
       <div className='my-3'>
         <Row className='h-100 flex justify-content-center'>
-          <ShowIf condition={authProviders.internal || authProviders.ldap || authProviders.openid}>
+          <ShowIf condition={authProviders.local || authProviders.ldap || authProviders.openid}>
             <Col xs={12} sm={10} lg={4}>
-              <ShowIf condition={authProviders.internal}>
-                <ViaInternal />
+              <ShowIf condition={authProviders.local}>
+                <ViaLocal />
               </ShowIf>
               <ShowIf condition={authProviders.ldap}>
                 <ViaLdap />
