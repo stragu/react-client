@@ -481,7 +481,8 @@
             "username": "Username",
             "error": {
                 "openIdLogin": "Invalid OpenID provided",
-                "usernamePassword": "Invalid username or password"
+                "usernamePassword": "Invalid username or password",
+                "signingOut": "Error while trying to sign you out"
             }
         },
         "register": {

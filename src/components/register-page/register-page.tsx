@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React, { FormEvent, Fragment, useCallback, useEffect, useState } from 'react'
+import React, { ChangeEvent, FormEvent, Fragment, useCallback, useEffect, useState } from 'react'
 import { Alert, Button, Card, Col, Form, Row } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router'
-import { doInternalRegister } from '../../api/auth'
+import { doLocalRegister } from '../../api/auth'
 import { useApplicationState } from '../../hooks/common/use-application-state'
 import { TranslatedExternalLink } from '../common/links/translated-external-link'
 import { ShowIf } from '../common/show-if/show-if'
@@ -31,13 +31,14 @@ export const RegisterPage: React.FC = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [displayName, setDisplayName] = useState('')
   const [passwordAgain, setPasswordAgain] = useState('')
   const [error, setError] = useState(RegisterError.NONE)
   const [ready, setReady] = useState(false)
 
   const doRegisterSubmit = useCallback(
     (event: FormEvent) => {
-      doInternalRegister(username, password)
+      doLocalRegister(username, displayName, password)
         .then(() => fetchAndSetUser())
         .catch((err: Error) => {
           log.error(err)
@@ -45,8 +46,24 @@ export const RegisterPage: React.FC = () => {
         })
       event.preventDefault()
     },
-    [username, password]
+    [username, password, displayName]
   )
+
+  const onUsernameChange = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
+    setUsername(event.target.value)
+  }, [])
+
+  const onDisplayNameChange = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
+    setDisplayName(event.target.value)
+  }, [])
+
+  const onPasswordChange = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
+    setPassword(event.target.value)
+  }, [])
+
+  const onPasswordAgainChange = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
+    setPasswordAgain(event.target.value)
+  }, [])
 
   useEffect(() => {
     setReady(username !== '' && password !== '' && password.length >= 8 && password === passwordAgain)
@@ -80,7 +97,7 @@ export const RegisterPage: React.FC = () => {
                       size='sm'
                       value={username}
                       isValid={username !== ''}
-                      onChange={(event) => setUsername(event.target.value)}
+                      onChange={onUsernameChange}
                       placeholder={t('login.auth.username')}
                       className='bg-dark text-light'
                       autoComplete='username'
@@ -91,6 +108,26 @@ export const RegisterPage: React.FC = () => {
                       <Trans i18nKey='login.register.usernameInfo' />
                     </Form.Text>
                   </Form.Group>
+                  <Form.Group controlId='displayname'>
+                    <Form.Label>
+                      <Trans i18nKey='profile.displayName' />
+                    </Form.Label>
+                    <Form.Control
+                      type='text'
+                      size='sm'
+                      value={displayName}
+                      isValid={displayName !== ''}
+                      onChange={onDisplayNameChange}
+                      placeholder={t('profile.displayName')}
+                      className='bg-dark text-light'
+                      autoComplete='nickname'
+                      autoFocus={true}
+                      required
+                    />
+                    <Form.Text>
+                      <Trans i18nKey='profile.displayNameInfo' />
+                    </Form.Text>
+                  </Form.Group>
                   <Form.Group controlId='password'>
                     <Form.Label>
                       <Trans i18nKey='login.auth.password' />
@@ -99,7 +136,7 @@ export const RegisterPage: React.FC = () => {
                       type='password'
                       size='sm'
                       isValid={password !== '' && password.length >= 8}
-                      onChange={(event) => setPassword(event.target.value)}
+                      onChange={onPasswordChange}
                       placeholder={t('login.auth.password')}
                       className='bg-dark text-light'
                       minLength={8}
@@ -119,7 +156,7 @@ export const RegisterPage: React.FC = () => {
                       size='sm'
                       isInvalid={passwordAgain !== '' && password !== passwordAgain}
                       isValid={passwordAgain !== '' && password === passwordAgain}
-                      onChange={(event) => setPasswordAgain(event.target.value)}
+                      onChange={onPasswordAgainChange}
                       placeholder={t('login.register.passwordAgain')}
                       className='bg-dark text-light'
                       autoComplete='new-password'

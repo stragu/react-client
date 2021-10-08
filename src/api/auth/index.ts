@@ -22,13 +22,22 @@ export const doLocalLogin = async (username: string, password: string): Promise<
   expectResponseCode(response, 201)
 }
 
-export const doInternalRegister = async (username: string, password: string): Promise<void> => {
-  const response = await fetch(getApiUrl() + 'auth/register', {
+export const doLocalLogout = async (): Promise<void> => {
+  const response = await fetch(getApiUrl() + 'auth/logout', {
+    ...defaultFetchConfig,
+    method: 'DELETE'
+  })
+  expectResponseCode(response)
+}
+
+export const doLocalRegister = async (username: string, displayName: string, password: string): Promise<void> => {
+  const response = await fetch(getApiUrl() + 'auth/local', {
     ...defaultFetchConfig,
     method: 'POST',
     body: JSON.stringify({
       username: username,
-      password: password
+      password: password,
+      displayName: displayName
     })
   })
 

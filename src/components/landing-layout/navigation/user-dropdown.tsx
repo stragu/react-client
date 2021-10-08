@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Dropdown } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -12,10 +12,18 @@ import { clearUser } from '../../../redux/user/methods'
 import { ForkAwesomeIcon } from '../../common/fork-awesome/fork-awesome-icon'
 import { UserAvatar } from '../../common/user-avatar/user-avatar'
 import { useApplicationState } from '../../../hooks/common/use-application-state'
+import { doLocalLogout } from '../../../api/auth'
+import { showErrorNotification } from '../../../redux/ui-notifications/methods'
 
 export const UserDropdown: React.FC = () => {
   useTranslation()
   const user = useApplicationState((state) => state.user)
+
+  const onLogoutClick = useCallback(() => {
+    doLocalLogout().then(() => {
+      clearUser()
+    }).catch(showErrorNotification('login.error.auth.signingOut'))
+  }, [])
 
   if (!user) {
     return null
@@ -42,9 +50,7 @@ export const UserDropdown: React.FC = () => {
         </LinkContainer>
         <Dropdown.Item
           dir='auto'
-          onClick={() => {
-            clearUser()
-          }}>
+          onClick={onLogoutClick}>
           <ForkAwesomeIcon icon='sign-out' fixedWidth={true} className='mx-2' />
           <Trans i18nKey='login.signOut' />
         </Dropdown.Item>
