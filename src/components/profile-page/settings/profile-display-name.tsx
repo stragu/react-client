@@ -14,7 +14,7 @@ import { useApplicationState } from '../../../hooks/common/use-application-state
 export const ProfileDisplayName: React.FC = () => {
   const regexInvalidDisplayName = /^\s*$/
   const { t } = useTranslation()
-  const userName = useApplicationState((state) => state.user?.name)
+  const userName = useApplicationState((state) => state.user?.displayName)
   const [submittable, setSubmittable] = useState(false)
   const [error, setError] = useState(false)
   const [displayName, setDisplayName] = useState('')

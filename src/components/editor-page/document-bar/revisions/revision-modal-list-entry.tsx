@@ -9,15 +9,15 @@ import React from 'react'
 import { ListGroup } from 'react-bootstrap'
 import { Trans } from 'react-i18next'
 import { RevisionListEntry } from '../../../../api/revisions/types'
-import { UserResponse } from '../../../../api/users/types'
 import { ForkAwesomeIcon } from '../../../common/fork-awesome/fork-awesome-icon'
 import { UserAvatar } from '../../../common/user-avatar/user-avatar'
+import { UserInfo } from '../../../../api/users/types'
 
 export interface RevisionModalListEntryProps {
   active: boolean
   onClick: () => void
   revision: RevisionListEntry
-  revisionAuthorListMap: Map<number, UserResponse[]>
+  revisionAuthorListMap: Map<number, UserInfo[]>
 }
 
 export const RevisionModalListEntry: React.FC<RevisionModalListEntryProps> = ({
@@ -43,7 +43,7 @@ export const RevisionModalListEntry: React.FC<RevisionModalListEntryProps> = ({
       <ForkAwesomeIcon icon={'user-o'} className={'mx-2'} />
       {revisionAuthorListMap.get(revision.timestamp)?.map((user, index) => {
         return (
-          <UserAvatar name={user.name} photo={user.photo} showName={false} additionalClasses={'mx-1'} key={index} />
+          <UserAvatar name={user.displayName} photo={user.photo} showName={false} additionalClasses={'mx-1'} key={index} />
         )
       })}
     </span>

@@ -6,11 +6,11 @@
 
 import { Cache } from '../../components/common/cache/cache'
 import { defaultFetchConfig, expectResponseCode, getApiUrl } from '../utils'
-import { UserResponse } from './types'
+import { UserInfo } from './types'
 
-const cache = new Cache<string, UserResponse>(600)
+const cache = new Cache<string, UserInfo>(600)
 
-export const getUserById = async (userid: string): Promise<UserResponse> => {
+export const getUserById = async (userid: string): Promise<UserInfo> => {
   if (cache.has(userid)) {
     return cache.get(userid)
   }
@@ -18,7 +18,7 @@ export const getUserById = async (userid: string): Promise<UserResponse> => {
     ...defaultFetchConfig
   })
   expectResponseCode(response)
-  const userData = (await response.json()) as UserResponse
+  const userData = (await response.json()) as UserInfo
   cache.put(userid, userData)
   return userData
 }

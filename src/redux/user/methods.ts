@@ -5,9 +5,10 @@
  */
 
 import { store } from '..'
-import { ClearUserAction, SetUserAction, UserActionType, UserState } from './types'
+import { ClearUserAction, SetUserAction, UserActionType } from './types'
+import { UserInfo } from '../../api/users/types'
 
-export const setUser: (state: UserState) => void = (state: UserState) => {
+export const setUser = (state: UserInfo): void => {
   const action: SetUserAction = {
     type: UserActionType.SET_USER,
     state
@@ -15,7 +16,7 @@ export const setUser: (state: UserState) => void = (state: UserState) => {
   store.dispatch(action)
 }
 
-export const clearUser: () => void = () => {
+export const clearUser = (): void => {
   const action: ClearUserAction = {
     type: UserActionType.CLEAR_USER
   }

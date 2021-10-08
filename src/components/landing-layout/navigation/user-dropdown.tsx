@@ -32,7 +32,7 @@ export const UserDropdown: React.FC = () => {
   return (
     <Dropdown alignRight>
       <Dropdown.Toggle size='sm' variant='dark' id='dropdown-user' className={'d-flex align-items-center'}>
-        <UserAvatar name={user.name} photo={user.photo} />
+        <UserAvatar name={user.displayName} photo={user.photo} />
       </Dropdown.Toggle>
 
       <Dropdown.Menu className='text-start'>

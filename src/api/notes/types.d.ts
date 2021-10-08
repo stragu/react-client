@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { UserInfoDto } from '../users/types'
+import { UserInfo } from '../users/types'
 import { GroupInfoDto } from '../group/types'
 
 export interface NoteDto {
@@ -21,7 +21,7 @@ export interface NoteMetadataDto {
   description: string
   tags: string[]
   updateTime: string
-  updateUser: UserInfoDto
+  updateUser: UserInfo
   viewCount: number
   createTime: string
   editedBy: string[]
@@ -37,13 +37,13 @@ export interface NoteAuthorshipDto {
 }
 
 export interface NotePermissionsDto {
-  owner: UserInfoDto
+  owner: UserInfo
   sharedToUsers: NoteUserPermissionEntryDto[]
   sharedToGroups: NoteGroupPermissionEntryDto[]
 }
 
 export interface NoteUserPermissionEntryDto {
-  user: UserInfoDto
+  user: UserInfo
   canEdit: boolean
 }
 

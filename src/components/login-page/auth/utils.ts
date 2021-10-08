@@ -9,10 +9,5 @@ import { setUser } from '../../../redux/user/methods'
 
 export const fetchAndSetUser: () => Promise<void> = async () => {
   const me = await getMe()
-  setUser({
-    id: me.id,
-    name: me.name,
-    photo: me.photo,
-    provider: me.provider
-  })
+  setUser(me)
 }

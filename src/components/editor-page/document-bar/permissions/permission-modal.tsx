@@ -78,7 +78,7 @@ export const PermissionModal: React.FC<PermissionsModalProps> = ({ show, onHide 
     getUserById(permissionsApiResponse.owner)
       .then((response) => {
         setOwner({
-          name: response.name,
+          name: response.displayName,
           photo: response.photo
         })
       })
@@ -90,8 +90,8 @@ export const PermissionModal: React.FC<PermissionsModalProps> = ({ show, onHide 
           setUserList((list) =>
             list.concat([
               {
-                id: response.id,
-                name: response.name,
+                id: response.userName,
+                name: response.displayName,
                 photo: response.photo,
                 canEdit: shareUser.canEdit
               }

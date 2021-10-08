@@ -4,16 +4,16 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { UserResponse } from '../users/types'
+import { UserInfo } from '../users/types'
 import { defaultFetchConfig, expectResponseCode, getApiUrl } from '../utils'
 import { isMockMode } from '../../utils/test-modes'
 
-export const getMe = async (): Promise<UserResponse> => {
+export const getMe = async (): Promise<UserInfo> => {
   const response = await fetch(getApiUrl() + `me${isMockMode() ? '-get' : ''}`, {
     ...defaultFetchConfig
   })
   expectResponseCode(response)
-  return (await response.json()) as UserResponse
+  return (await response.json()) as UserInfo
 }
 
 export const updateDisplayName = async (displayName: string): Promise<void> => {
