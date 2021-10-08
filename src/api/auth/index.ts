@@ -10,7 +10,7 @@ import { defaultFetchConfig, expectResponseCode, getApiUrl } from '../utils'
 export const INTERACTIVE_LOGIN_METHODS = ['local', 'ldap', 'openid']
 
 export const doLocalLogin = async (username: string, password: string): Promise<void> => {
-  const response = await fetch(getApiUrl() + 'auth/local', {
+  const response = await fetch(getApiUrl() + 'auth/local/login', {
     ...defaultFetchConfig,
     method: 'POST',
     body: JSON.stringify({
@@ -19,7 +19,7 @@ export const doLocalLogin = async (username: string, password: string): Promise<
     })
   })
 
-  expectResponseCode(response)
+  expectResponseCode(response, 201)
 }
 
 export const doInternalRegister = async (username: string, password: string): Promise<void> => {
