@@ -482,7 +482,7 @@
             "error": {
                 "openIdLogin": "Invalid OpenID provided",
                 "usernamePassword": "Invalid username or password",
-                "signingOut": "Error while trying to sign you out"
+                "signingOut": "Error while trying to sign you out on the server.\nClose your browser window to protect your account."
             }
         },
         "register": {
