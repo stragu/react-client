@@ -11,6 +11,7 @@ import { deleteUser } from '../../../api/me'
 import { getApiUrl } from '../../../api/utils'
 import { clearUser } from '../../../redux/user/methods'
 import { ForkAwesomeIcon } from '../../common/fork-awesome/fork-awesome-icon'
+import { showErrorNotification } from '../../../redux/ui-notifications/methods'
 
 export const ProfileAccountManagement: React.FC = () => {
   useTranslation()
@@ -53,8 +54,8 @@ export const ProfileAccountManagement: React.FC = () => {
     startCountdown()
   }
 
-  const deleteUserAccount = async () => {
-    await deleteUser()
+  const deleteUserAccount = () => {
+    deleteUser().catch(showErrorNotification('profile.error.deleteUser'))
     clearUser()
   }
 

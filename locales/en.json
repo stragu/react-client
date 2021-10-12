@@ -180,6 +180,9 @@
                 "title": "Really delete token?",
                 "message": "When deleting an access token, the applications that used it won't have access to your account anymore. You eventually need a new token to continue using those applications."
             }
+        },
+        "error":{
+            "deleteUser": "Your user account wasn't deleted properly.\nPlease contact the administrator of this HedgeDoc instance."
         }
     },
     "editor": {
