@@ -182,7 +182,8 @@
             }
         },
         "error":{
-            "deleteUser": "Your user account wasn't deleted properly.\nPlease contact the administrator of this HedgeDoc instance."
+            "deleteUser": "Your user account wasn't deleted properly.\nPlease contact the administrator of this HedgeDoc instance.",
+            "changePassword": "Your password couldn't be changed."
         }
     },
     "editor": {

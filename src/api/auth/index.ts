@@ -30,6 +30,18 @@ export const doLocalLogout = async (): Promise<void> => {
   expectResponseCode(response)
 }
 
+export const doLocalPasswordChange = async (newPassword: string): Promise<void> => {
+  const response = await fetch(getApiUrl() + 'auth/local', {
+    ...defaultFetchConfig,
+    method: 'PUT',
+    body: JSON.stringify({
+      newPassword
+    })
+  })
+
+  expectResponseCode(response)
+}
+
 export const doLocalRegister = async (username: string, displayName: string, password: string): Promise<void> => {
   const response = await fetch(getApiUrl() + 'auth/local', {
     ...defaultFetchConfig,

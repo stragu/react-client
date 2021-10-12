@@ -7,7 +7,8 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { Button, Card, Form } from 'react-bootstrap'
 import { Trans, useTranslation } from 'react-i18next'
-import { changePassword } from '../../../api/me'
+import { doLocalPasswordChange } from '../../../api/auth'
+import { showErrorNotification } from '../../../redux/ui-notifications/methods'
 
 export const ProfileChangePassword: React.FC = () => {
   useTranslation()
@@ -30,8 +31,8 @@ export const ProfileChangePassword: React.FC = () => {
     setNewPasswordAgainValid(event.target.value === newPassword)
   }
 
-  const updatePasswordSubmit = async (event: FormEvent) => {
-    await changePassword(oldPassword, newPassword)
+  const updatePasswordSubmit = (event: FormEvent) => {
+    doLocalPasswordChange(newPassword).catch(showErrorNotification('profile.error.changePassword'))
     event.preventDefault()
   }
 

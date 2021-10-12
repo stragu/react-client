@@ -17,24 +17,11 @@ export const getMe = async (): Promise<UserInfo> => {
 }
 
 export const updateDisplayName = async (displayName: string): Promise<void> => {
-  const response = await fetch(getApiUrl() + 'me', {
+  const response = await fetch(getApiUrl() + 'me/profile', {
     ...defaultFetchConfig,
     method: 'POST',
     body: JSON.stringify({
       name: displayName
-    })
-  })
-
-  expectResponseCode(response)
-}
-
-export const changePassword = async (oldPassword: string, newPassword: string): Promise<void> => {
-  const response = await fetch(getApiUrl() + 'me/password', {
-    ...defaultFetchConfig,
-    method: 'POST',
-    body: JSON.stringify({
-      oldPassword,
-      newPassword
     })
   })
 
