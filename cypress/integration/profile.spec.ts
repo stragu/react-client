@@ -42,7 +42,7 @@ describe('profile page', () => {
     )
     cy.intercept(
       {
-        url: '/mock-backend/api/private/tokens/1601991518',
+        url: '/mock-backend/api/private/tokens/OE90fHg5Pro',
         method: 'DELETE'
       },
       {
@@ -61,7 +61,7 @@ describe('profile page', () => {
       cy.get('.modal-dialog').should('not.exist')
       cy.get('.card.access-tokens .list-group-item .btn-danger').click()
       cy.get('.modal-dialog').should('be.visible').get('.modal-footer .btn-danger').click()
-      cy.get('.modal-dialog').should('not.be.visible')
+      cy.get('.modal-dialog').should('not.exist')
     })
 
     it('add token', () => {
