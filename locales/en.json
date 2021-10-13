@@ -164,7 +164,8 @@
             "noTokens": "You don't have any tokens generated yet.",
             "createToken": "Create token",
             "label": "Token label",
-            "created": "created {{time}}"
+            "created": "created {{time}}",
+            "lastUsed": "last used {{time}}"
         },
         "modal": {
             "deleteUser": {

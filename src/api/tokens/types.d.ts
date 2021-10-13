@@ -5,8 +5,11 @@
  */
 
 export interface AccessToken {
+  createdAt: string
+  keyId: string
+  lastUsed: string | null
   label: string
-  created: number
+  validUntil: string
 }
 
 export interface AccessTokenSecret {

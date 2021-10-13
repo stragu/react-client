@@ -12,7 +12,7 @@ import { showErrorNotification } from '../../../redux/ui-notifications/methods'
 
 export const ProfileChangePassword: React.FC = () => {
   useTranslation()
-  const [oldPassword, setOldPassword] = useState('')
+  const [, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [newPasswordAgain, setNewPasswordAgain] = useState('')
   const [newPasswordValid, setNewPasswordValid] = useState(false)

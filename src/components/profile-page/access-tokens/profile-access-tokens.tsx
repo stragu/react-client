@@ -15,20 +15,18 @@ import { IconButton } from '../../common/icon-button/icon-button'
 import { CommonModal } from '../../common/modals/common-modal'
 import { DeletionModal } from '../../common/modals/deletion-modal'
 import { ShowIf } from '../../common/show-if/show-if'
-import { Logger } from '../../../utils/logger'
+import { showErrorNotification } from '../../../redux/ui-notifications/methods'
 
-const log = new Logger('ProfileAccessTokens')
 
 export const ProfileAccessTokens: React.FC = () => {
   const { t } = useTranslation()
 
-  const [error, setError] = useState(false)
   const [showAddedModal, setShowAddedModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [accessTokens, setAccessTokens] = useState<AccessToken[]>([])
   const [newTokenLabel, setNewTokenLabel] = useState('')
   const [newTokenSecret, setNewTokenSecret] = useState('')
-  const [selectedForDeletion, setSelectedForDeletion] = useState(0)
+  const [selectedForDeletion, setSelectedForDeletion] = useState('')
 
   const addToken = useCallback(
     (event: FormEvent) => {
@@ -39,10 +37,7 @@ export const ProfileAccessTokens: React.FC = () => {
           setShowAddedModal(true)
           setNewTokenLabel('')
         })
-        .catch((error) => {
-          log.error(error)
-          setError(true)
-        })
+        .catch(showErrorNotification(''))
     },
     [newTokenLabel]
   )
@@ -50,19 +45,16 @@ export const ProfileAccessTokens: React.FC = () => {
   const deleteToken = useCallback(() => {
     deleteAccessToken(selectedForDeletion)
       .then(() => {
-        setSelectedForDeletion(0)
+        setSelectedForDeletion('')
       })
-      .catch((error) => {
-        log.error(error)
-        setError(true)
-      })
+      .catch(showErrorNotification(''))
       .finally(() => {
         setShowDeleteModal(false)
       })
-  }, [selectedForDeletion, setError])
+  }, [selectedForDeletion])
 
-  const selectForDeletion = useCallback((timestamp: number) => {
-    setSelectedForDeletion(timestamp)
+  const selectForDeletion = useCallback((keyId: string) => {
+    setSelectedForDeletion(keyId)
     setShowDeleteModal(true)
   }, [])
 
@@ -73,14 +65,10 @@ export const ProfileAccessTokens: React.FC = () => {
   useEffect(() => {
     getAccessTokenList()
       .then((tokens) => {
-        setError(false)
         setAccessTokens(tokens)
       })
-      .catch((err) => {
-        log.error(err)
-        setError(true)
-      })
-  }, [showAddedModal])
+      .catch(showErrorNotification(''))
+  }, [showAddedModal, showDeleteModal])
 
   return (
     <Fragment>
@@ -96,30 +84,36 @@ export const ProfileAccessTokens: React.FC = () => {
             <Trans i18nKey='profile.accessTokens.infoDev' />
           </p>
           <hr />
-          <ShowIf condition={accessTokens.length === 0 && !error}>
+          <ShowIf condition={accessTokens.length === 0}>
             <Trans i18nKey='profile.accessTokens.noTokens' />
-          </ShowIf>
-          <ShowIf condition={error}>
-            <Trans i18nKey='common.errorOccurred' />
           </ShowIf>
           <ListGroup>
             {accessTokens.map((token) => {
               return (
-                <ListGroup.Item className='bg-dark' key={token.created}>
+                <ListGroup.Item className='bg-dark' key={token.keyId}>
                   <Row>
                     <Col className='text-start'>{token.label}</Col>
                     <Col className='text-start text-white-50'>
                       <Trans
                         i18nKey='profile.accessTokens.created'
                         values={{
-                          time: DateTime.fromSeconds(token.created).toRelative({
+                          time: DateTime.fromISO(token.createdAt).toRelative({
+                            style: 'short'
+                          })
+                        }}
+                      />
+                      <br />
+                      <Trans
+                        i18nKey='profile.accessTokens.lastUsed'
+                        values={{
+                          time: DateTime.fromISO(token.lastUsed ?? token.createdAt).toRelative({
                             style: 'short'
                           })
                         }}
                       />
                     </Col>
                     <Col xs='auto'>
-                      <IconButton icon='trash-o' variant='danger' onClick={() => selectForDeletion(token.created)} />
+                      <IconButton icon='trash-o' variant='danger' onClick={() => selectForDeletion(token.keyId)} />
                     </Col>
                   </Row>
                 </ListGroup.Item>

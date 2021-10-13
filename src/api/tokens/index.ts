@@ -19,16 +19,19 @@ export const postNewAccessToken = async (label: string): Promise<AccessToken & A
   const response = await fetch(`${getApiUrl()}tokens`, {
     ...defaultFetchConfig,
     method: 'POST',
-    body: label
+    body: JSON.stringify({
+      label,
+      validUntil: Date.now() + 365 * 24 * 3600 * 1000
+    })
   })
-  expectResponseCode(response)
+  expectResponseCode(response, 201)
   return (await response.json()) as AccessToken & AccessTokenSecret
 }
 
-export const deleteAccessToken = async (timestamp: number): Promise<void> => {
-  const response = await fetch(`${getApiUrl()}tokens/${timestamp}`, {
+export const deleteAccessToken = async (keyId: string): Promise<void> => {
+  const response = await fetch(`${getApiUrl()}tokens/${keyId}`, {
     ...defaultFetchConfig,
     method: 'DELETE'
   })
-  expectResponseCode(response)
+  expectResponseCode(response, 204)
 }
