@@ -66,7 +66,7 @@ export const ProfileAccessTokens: React.FC = () => {
       .then((tokens) => {
         setAccessTokens(tokens)
       })
-      .catch(showErrorNotification('profile.accessTokens.error.list'));
+      .catch(showErrorNotification('profile.accessTokens.error.list'))
   }, [showAddedModal, showDeleteModal])
 
   return (
