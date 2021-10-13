@@ -43,7 +43,13 @@ export const RevisionModalListEntry: React.FC<RevisionModalListEntryProps> = ({
       <ForkAwesomeIcon icon={'user-o'} className={'mx-2'} />
       {revisionAuthorListMap.get(revision.timestamp)?.map((user, index) => {
         return (
-          <UserAvatar name={user.displayName} photo={user.photo} showName={false} additionalClasses={'mx-1'} key={index} />
+          <UserAvatar
+            name={user.displayName}
+            photo={user.photo}
+            showName={false}
+            additionalClasses={'mx-1'}
+            key={index}
+          />
         )
       })}
     </span>

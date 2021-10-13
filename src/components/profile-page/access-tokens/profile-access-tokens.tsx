@@ -17,7 +17,6 @@ import { DeletionModal } from '../../common/modals/deletion-modal'
 import { ShowIf } from '../../common/show-if/show-if'
 import { showErrorNotification } from '../../../redux/ui-notifications/methods'
 
-
 export const ProfileAccessTokens: React.FC = () => {
   const { t } = useTranslation()
 
