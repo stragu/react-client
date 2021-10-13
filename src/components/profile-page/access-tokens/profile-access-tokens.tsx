@@ -36,7 +36,7 @@ export const ProfileAccessTokens: React.FC = () => {
           setShowAddedModal(true)
           setNewTokenLabel('')
         })
-        .catch(showErrorNotification(''))
+        .catch(showErrorNotification('profile.accessTokens.error.create'))
     },
     [newTokenLabel]
   )
@@ -46,7 +46,7 @@ export const ProfileAccessTokens: React.FC = () => {
       .then(() => {
         setSelectedForDeletion('')
       })
-      .catch(showErrorNotification(''))
+      .catch(showErrorNotification('profile.accessTokens.error.delete'))
       .finally(() => {
         setShowDeleteModal(false)
       })
@@ -66,7 +66,7 @@ export const ProfileAccessTokens: React.FC = () => {
       .then((tokens) => {
         setAccessTokens(tokens)
       })
-      .catch(showErrorNotification(''))
+      .catch(showErrorNotification('profile.accessTokens.error.list'));
   }, [showAddedModal, showDeleteModal])
 
   return (

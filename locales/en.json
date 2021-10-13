@@ -165,7 +165,12 @@
             "createToken": "Create token",
             "label": "Token label",
             "created": "created {{time}}",
-            "lastUsed": "last used {{time}}"
+            "lastUsed": "last used {{time}}",
+            "error": {
+                "list": "Error retrieving your access tokens",
+                "delete": "Error deleting your access token.\nPlease ask your instance administrator for help.",
+                "create": "Error creating your access token.\nTry it again in a few moments."
+            }
         },
         "modal": {
             "deleteUser": {
