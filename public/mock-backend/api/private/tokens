@@ -1,10 +1,9 @@
 [
     {
-        "label": "Demo-App",
-        "created": 1601991518
-    },
-    {
-        "label": "CLI @ Test-PC",
-        "created": 1601912159
+        "createdAt": "2021-10-13T01:21:16.927Z"
+        "keyId": "OE90fHg5Pro"
+        "label": "test"
+        "lastUsed": null
+        "validUntil": "2022-10-13T01:21:16.702Z"
     }
 ]

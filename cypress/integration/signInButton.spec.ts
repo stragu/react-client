@@ -14,7 +14,7 @@ const authProvidersDisabled = {
   google: false,
   saml: false,
   oauth2: false,
-  internal: false,
+  local: false,
   openid: false
 }
 
@@ -49,7 +49,7 @@ describe('When logged-out ', () => {
   describe('and an interactive auth-provider is enabled, ', () => {
     it('sign-in button points to login route: internal', () => {
       initLoggedOutTestWithCustomAuthProviders(cy, {
-        internal: true
+        local: true
       })
       cy.get('[data-cy=sign-in-button]')
         .should('be.visible')
@@ -103,7 +103,7 @@ describe('When logged-out ', () => {
     it('sign-in button points to login route', () => {
       initLoggedOutTestWithCustomAuthProviders(cy, {
         saml: true,
-        internal: true
+        local: true
       })
       cy.get('[data-cy=sign-in-button]')
         .should('be.visible')
