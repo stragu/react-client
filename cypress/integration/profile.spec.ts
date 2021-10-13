@@ -14,7 +14,7 @@ describe('profile page', () => {
       {
         body: [
           {
-            label: 'test',
+            label: 'cypress-App',
             keyId: 'OE90fHg5Pro',
             createdAt: '2021-10-13T01:21:16.927Z',
             validUntil: '2022-10-13T01:21:16.702Z',
@@ -61,7 +61,7 @@ describe('profile page', () => {
       cy.get('.modal-dialog').should('not.exist')
       cy.get('.card.access-tokens .list-group-item .btn-danger').click()
       cy.get('.modal-dialog').should('be.visible').get('.modal-footer .btn-danger').click()
-      cy.get('.modal-dialog').should('not.exist')
+      cy.get('.modal-dialog').should('not.be.visible')
     })
 
     it('add token', () => {
@@ -73,6 +73,7 @@ describe('profile page', () => {
         .should('be.visible')
         .get('.modal-dialog input[readonly]')
         .should('have.value', 'c-y-p-r-e-s-s')
+      cy.get('.card.access-tokens .list-group-item .text-start.col').contains('cypress')
     })
   })
 })
