@@ -17,10 +17,11 @@ import './slideshow.scss'
 import type { ScrollProps } from '../editor-page/synced-scroll/scroll-props'
 import { DocumentLengthLimitReachedAlert } from './document-length-limit-reached-alert'
 import type { SlideOptions } from '../common/note-frontmatter/types'
-import { processRevealCommentNodes } from './process-reveal-comment-nodes'
+import { RevealCommentCommandNodePreprocessor } from './process-reveal-comment-nodes'
 import type { CommonMarkdownRendererProps } from './common-markdown-renderer-props'
 import { LoadingSlide } from './loading-slide'
 import { SlideshowMarkdownItConfigurator } from './markdown-it-configurator/slideshow-markdown-it-configurator'
+import { useNodePreprocessors } from './hooks/use-node-preprocessors'
 
 export interface SlideshowMarkdownRendererProps extends CommonMarkdownRendererProps {
   slideOptions: SlideOptions
@@ -51,13 +52,12 @@ export const SlideshowMarkdownRenderer: React.FC<SlideshowMarkdownRendererProps 
       }).buildConfiguredMarkdownIt(),
     [lineOffset, useAlternativeBreaks]
   )
-  const replacers = useComponentReplacers(onTaskCheckedChange, onImageClick, baseUrl, lineOffset)
-  const markdownReactDom = useConvertMarkdownToReactDom(
-    trimmedContent,
-    markdownIt,
-    replacers,
-    processRevealCommentNodes
+  const replacers = useComponentReplacers(onTaskCheckedChange, onImageClick, lineOffset)
+  const nodePreprocessor = useNodePreprocessors(
+    baseUrl,
+    useMemo(() => [new RevealCommentCommandNodePreprocessor()], [])
   )
+  const markdownReactDom = useConvertMarkdownToReactDom(trimmedContent, markdownIt, replacers, nodePreprocessor)
   const revealStatus = useReveal(content, slideOptions)
 
   useExtractFirstHeadline(

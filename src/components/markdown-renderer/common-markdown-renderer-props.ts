@@ -12,7 +12,7 @@ export interface CommonMarkdownRendererProps {
   onFirstHeadingChange?: (firstHeading: string | undefined) => void
   onTaskCheckedChange?: (lineInMarkdown: number, checked: boolean) => void
   onTocChange?: (ast?: TocAst) => void
-  baseUrl?: string
+  baseUrl: string
   onImageClick?: ImageClickHandler
   outerContainerRef?: Ref<HTMLDivElement>
   useAlternativeBreaks?: boolean

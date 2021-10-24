@@ -3,9 +3,10 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import type { DataNode, Document, Element, Node } from 'domhandler'
-import { hasChildren, isComment, isTag } from 'domhandler'
+import type { DataNode, Element, Node } from 'domhandler'
+import { isComment, isTag } from 'domhandler'
 import { Logger } from '../../utils/logger'
+import { TravelerNodeProcessor } from './node-preprocessors/traveler-node-processor'
 
 const log = new Logger('reveal.js > Comment Node Preprocessor')
 const revealCommandSyntax = /^\s*\.(\w*):(.*)$/g
@@ -17,20 +18,11 @@ const dataAttributesSyntax = /\s*(data-[\w-]*|class)=(?:"((?:[^"\\]|\\"|\\)*)"|'
  * @param doc The document that should be changed
  * @return The edited document
  */
-export const processRevealCommentNodes = (doc: Document): Document => {
-  visitNode(doc)
-  return doc
-}
-
-/**
- * Processes the given {@link Node} if it is a comment node. If the node has children then all child nodes will be processed.
- * @param node The node to process.
- */
-const visitNode = (node: Node): void => {
-  if (isComment(node)) {
-    processCommentNode(node)
-  } else if (hasChildren(node)) {
-    node.childNodes.forEach((childNode) => visitNode(childNode))
+export class RevealCommentCommandNodePreprocessor extends TravelerNodeProcessor {
+  protected processNode(node: Node): void {
+    if (isComment(node)) {
+      processCommentNode(node)
+    }
   }
 }
 

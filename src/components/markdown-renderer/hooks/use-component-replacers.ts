@@ -12,8 +12,7 @@ import type { ImageClickHandler } from '../replace-components/image/image-replac
 import { ImageReplacer } from '../replace-components/image/image-replacer'
 import { KatexReplacer } from '../replace-components/katex/katex-replacer'
 import { LinemarkerReplacer } from '../replace-components/linemarker/linemarker-replacer'
-import { LinkReplacer } from '../replace-components/link-replacer/link-replacer'
-import { ColoredBlockquoteReplacer } from '../replace-components/colored-blockquote/colored-blockquote-replacer'
+import { JumpAnchorReplacer } from '../replace-components/link-replacer/jump-anchor-replacer'
 import type { TaskCheckedChangeHandler } from '../replace-components/task-list/task-list-replacer'
 import { TaskListReplacer } from '../replace-components/task-list/task-list-replacer'
 import { CodeBlockComponentReplacer } from '../replace-components/code-block-component-replacer'
@@ -29,13 +28,14 @@ import { GistFrame } from '../replace-components/gist/gist-frame'
 import { YouTubeFrame } from '../replace-components/youtube/youtube-frame'
 import { VimeoFrame } from '../replace-components/vimeo/vimeo-frame'
 import { AsciinemaFrame } from '../replace-components/asciinema/asciinema-frame'
+import { BlockquoteTextTagReplacer } from '../replace-components/blockquote-tag/blockquote-text-tag-replacer'
+import { BlockquoteColorTagReplacer } from '../replace-components/blockquote-tag/blockquote-color-tag-replacer'
 
 /**
  * Provides a function that creates a list of {@link ComponentReplacer component replacer} instances.
  *
  * @param onTaskCheckedChange A callback that gets executed if a task checkbox gets clicked
  * @param onImageClick A callback that should be executed if an image gets clicked
- * @param baseUrl The base url for relative links
  * @param frontmatterLinesToSkip The number of lines of the frontmatter part to add this as offset to line-numbers.
  *
  * @return the created list
@@ -43,7 +43,6 @@ import { AsciinemaFrame } from '../replace-components/asciinema/asciinema-frame'
 export const useComponentReplacers = (
   onTaskCheckedChange?: TaskCheckedChangeHandler,
   onImageClick?: ImageClickHandler,
-  baseUrl?: string,
   frontmatterLinesToSkip?: number
 ): ComponentReplacer[] =>
   useMemo(
@@ -62,11 +61,12 @@ export const useComponentReplacers = (
       new CodeBlockComponentReplacer(GraphvizFrame, 'graphviz'),
       new CodeBlockComponentReplacer(MarkmapFrame, 'markmap'),
       new CodeBlockComponentReplacer(VegaChart, 'vega-lite'),
+      new BlockquoteColorTagReplacer(),
+      new BlockquoteTextTagReplacer(),
       new HighlightedCodeReplacer(),
-      new ColoredBlockquoteReplacer(),
       new KatexReplacer(),
       new TaskListReplacer(frontmatterLinesToSkip, onTaskCheckedChange),
-      new LinkReplacer(baseUrl)
+      new JumpAnchorReplacer()
     ],
-    [onImageClick, onTaskCheckedChange, baseUrl, frontmatterLinesToSkip]
+    [onImageClick, onTaskCheckedChange, frontmatterLinesToSkip]
   )

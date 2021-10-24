@@ -26,8 +26,7 @@ import { legacyPdfShortCode } from '../regex-plugins/replace-legacy-pdf-short-co
 import { legacySlideshareShortCode } from '../regex-plugins/replace-legacy-slideshare-short-code'
 import { legacySpeakerdeckShortCode } from '../regex-plugins/replace-legacy-speakerdeck-short-code'
 import { highlightedCode } from '../markdown-it-plugins/highlighted-code'
-import { quoteExtraColor } from '../markdown-it-plugins/quote-extra-color'
-import { quoteExtra } from '../markdown-it-plugins/quote-extra'
+import { BlockquoteTagMarkdownItPlugin } from '../markdown-it-plugins/blockquote/blockquote-tag'
 import { documentTableOfContents } from '../markdown-it-plugins/document-table-of-contents'
 import { youtubeMarkdownItPlugin } from '../replace-components/youtube/youtube-markdown-it-plugin'
 import { vimeoMarkdownItPlugin } from '../replace-components/vimeo/vimeo-markdown-it-plugin'
@@ -74,9 +73,9 @@ export abstract class MarkdownItConfigurator<T extends Configuration> {
       legacySlideshareShortCode,
       legacySpeakerdeckShortCode,
       highlightedCode,
-      quoteExtraColor,
-      quoteExtra('name', 'user'),
-      quoteExtra('time', 'clock-o'),
+      new BlockquoteTagMarkdownItPlugin('color', 'tag').createMarkdownItPlugin(),
+      new BlockquoteTagMarkdownItPlugin('name', 'user').createMarkdownItPlugin(),
+      new BlockquoteTagMarkdownItPlugin('time', 'clock-o').createMarkdownItPlugin(),
       documentTableOfContents(this.options.onTocChange),
       twitterEmojis,
       abbreviation,

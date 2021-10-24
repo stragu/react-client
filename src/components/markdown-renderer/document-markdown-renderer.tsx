@@ -19,6 +19,7 @@ import { useOnRefChange } from './hooks/use-on-ref-change'
 import { useTrimmedContent } from './hooks/use-trimmed-content'
 import type { CommonMarkdownRendererProps } from './common-markdown-renderer-props'
 import { DocumentMarkdownItConfigurator } from './markdown-it-configurator/document-markdown-it-configurator'
+import { useNodePreprocessors } from './hooks/use-node-preprocessors'
 
 export interface DocumentMarkdownRendererProps extends CommonMarkdownRendererProps {
   onLineMarkerPositionChanged?: (lineMarkerPosition: LineMarkerPosition[]) => void
@@ -55,8 +56,9 @@ export const DocumentMarkdownRenderer: React.FC<DocumentMarkdownRendererProps> =
       }).buildConfiguredMarkdownIt(),
     [onLineMarkerPositionChanged, useAlternativeBreaks, lineOffset]
   )
-  const replacers = useComponentReplacers(onTaskCheckedChange, onImageClick, baseUrl, lineOffset)
-  const markdownReactDom = useConvertMarkdownToReactDom(trimmedContent, markdownIt, replacers)
+  const replacers = useComponentReplacers(onTaskCheckedChange, onImageClick, lineOffset)
+  const nodePreprocessor = useNodePreprocessors(baseUrl)
+  const markdownReactDom = useConvertMarkdownToReactDom(trimmedContent, markdownIt, replacers, nodePreprocessor)
 
   useTranslation()
   useCalculateLineMarkerPosition(
