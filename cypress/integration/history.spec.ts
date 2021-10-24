@@ -15,8 +15,8 @@ describe('History', () => {
     })
 
     it('Table', () => {
-      cy.get('[data-cypress-id="history-mode-table"]').click()
-      cy.get('[data-cypress-id="history-table"]').should('be.visible')
+      cy.getById('history-mode-table').click()
+      cy.getById('history-table').should('be.visible')
     })
   })
 
@@ -39,13 +39,13 @@ describe('History', () => {
       })
 
       it('in table view', () => {
-        cy.get('[data-cypress-id="history-mode-table"]').click()
-        cy.get('[data-cypress-id="history-table"]').should('be.visible')
-        cy.get('[data-cypress-id="history-entry-title"]').contains('Features')
+        cy.getById('history-mode-table').click()
+        cy.getById('history-table').should('be.visible')
+        cy.getById('history-entry-title').contains('Features')
       })
 
       it('in cards view', () => {
-        cy.get('[data-cypress-id="history-entry-title"]').contains('Features')
+        cy.getById('history-entry-title').contains('Features')
       })
     })
     describe('is untitled when not empty', () => {
@@ -66,13 +66,13 @@ describe('History', () => {
       })
 
       it('in table view', () => {
-        cy.get('[data-cypress-id="history-mode-table"]').click()
-        cy.get('[data-cypress-id="history-table"]').should('be.visible')
-        cy.get('[data-cypress-id="history-entry-title"]').contains('Untitled')
+        cy.getById('history-mode-table').click()
+        cy.getById('history-table').should('be.visible')
+        cy.getById('history-entry-title').contains('Untitled')
       })
 
       it('in cards view', () => {
-        cy.get('[data-cypress-id="history-entry-title"]').contains('Untitled')
+        cy.getById('history-entry-title').contains('Untitled')
       })
     })
   })
@@ -136,43 +136,37 @@ describe('History', () => {
     })
 
     it('works with valid file', () => {
-      cy.get('[data-cypress-id="import-history-file-button"]').click()
-      cy.get('[data-cypress-id="import-history-file-input"]').attachFile({
+      cy.getById('import-history-file-button').click()
+      cy.getById('import-history-file-input').attachFile({
         filePath: 'history.json',
         mimeType: 'application/json'
       })
-      cy.get('[data-cypress-id="history-entry-title"]')
-        .should('have.length', 1)
-        .contains('cy-Test')
+      cy.getById('history-entry-title').should('have.length', 1).contains('cy-Test')
     })
 
     it('fails on invalid file', () => {
-      cy.get('[data-cypress-id="import-history-file-button"]').click()
-      cy.get('[data-cypress-id="import-history-file-input"]').attachFile({
+      cy.getById('import-history-file-button').click()
+      cy.getById('import-history-file-input').attachFile({
         filePath: 'history.json.license',
         mimeType: 'text/plain'
       })
-      cy.get('[data-cypress-id="notification-toast"]').should('be.visible')
+      cy.getById('notification-toast').should('be.visible')
     })
 
     it('works when selecting two files with the same name', () => {
-      cy.get('[data-cypress-id="import-history-file-button"]').click()
-      cy.get('[data-cypress-id="import-history-file-input"]').attachFile({
+      cy.getById('import-history-file-button').click()
+      cy.getById('import-history-file-input').attachFile({
         filePath: 'history.json',
         mimeType: 'application/json'
       })
-      cy.get('[data-cypress-id="history-entry-title"]')
-        .should('have.length', 1)
-        .contains('cy-Test')
-      cy.get('[data-cypress-id="import-history-file-button"]').click()
-      cy.get('[data-cypress-id="import-history-file-input"]').attachFile({
+      cy.getById('history-entry-title').should('have.length', 1).contains('cy-Test')
+      cy.getById('import-history-file-button').click()
+      cy.getById('import-history-file-input').attachFile({
         filePath: 'history-2.json',
         fileName: 'history.json',
         mimeType: 'application/json'
       })
-      cy.get('[data-cypress-id="history-entry-title"]')
-        .should('have.length', 2)
-        .contains('cy-Test2')
+      cy.getById('history-entry-title').should('have.length', 2).contains('cy-Test2')
     })
   })
 })

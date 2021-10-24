@@ -59,7 +59,7 @@ describe('Motd', () => {
     cy.get('[data-cypress-id="motd"]').should('not.exist')
   })
 
-  it("will show again after reload without dismiss", () => {
+  it('will show again after reload without dismiss', () => {
     mockExistingMotd()
     cy.visit('/')
     cy.get('[data-cypress-id="motd"]').contains(motdMockContent)

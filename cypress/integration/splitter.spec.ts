@@ -31,7 +31,7 @@ describe('Split view', () => {
     cy.get('.splitter.left').then((leftPanebefore) => {
       const widthBefore = leftPanebefore.outerWidth()
 
-      cy.get('[data-cypress-id="view-mode-both"]').click()
+      cy.getById('view-mode-both').click()
       cy.get('.split-divider').should('be.visible').trigger('mousedown', { buttons: 1 })
       cy.document().trigger('mousemove', { buttons: 1, pageX: 0, pageY: 0 })
       cy.get('.split-divider').trigger('mouseup')
