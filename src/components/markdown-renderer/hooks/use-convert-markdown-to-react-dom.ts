@@ -8,10 +8,9 @@ import type MarkdownIt from 'markdown-it/lib'
 import { useMemo } from 'react'
 import type { ComponentReplacer, ValidReactDomElement } from '../replace-components/component-replacer'
 import convertHtmlToReact from '@hedgedoc/html-to-react'
-import type { Document } from 'domhandler'
 import { NodeToReactTransformer } from '../utils/node-to-react-transformer'
 import { LineIdMapper } from '../utils/line-id-mapper'
-import type { NodeProcess } from './use-node-preprocessors'
+import type { NodePreProcessFunction } from './use-node-preprocessors'
 
 /**
  * Renders markdown code into react elements
@@ -26,7 +25,7 @@ export const useConvertMarkdownToReactDom = (
   markdownCode: string,
   markdownIt: MarkdownIt,
   replacers: ComponentReplacer[],
-  nodePreProcessor: NodeProcess
+  nodePreProcessor: NodePreProcessFunction
 ): ValidReactDomElement[] => {
   const lineNumberMapper = useMemo(() => new LineIdMapper(), [])
   const htmlToReactTransformer = useMemo(() => new NodeToReactTransformer(), [])
