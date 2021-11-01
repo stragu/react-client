@@ -17,7 +17,7 @@ export class AsciinemaMarkdownExtension extends MarkdownExtension {
     markdownItRegex(markdownIt, replaceAsciinemaLink)
   }
 
-  public buildReplacer(): ComponentReplacer[] {
+  public buildReplacers(): ComponentReplacer[] {
     return [new CustomTagWithIdComponentReplacer(AsciinemaFrame, 'asciinema')]
   }
 
