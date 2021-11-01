@@ -13,7 +13,6 @@ export interface QuoteExtraTagValues {
   value: string
 }
 
-
 /**
  * Parses a blockquote tag. The syntax is [label=value].
  *
@@ -21,7 +20,11 @@ export interface QuoteExtraTagValues {
  * @param startIndex The start index for the search.
  * @param dontSearchAfterIndex The maximal position for the search.
  */
-export const parseBlockquoteTag = (line: string, startIndex: number, dontSearchAfterIndex: number): QuoteExtraTagValues | undefined => {
+export const parseBlockquoteTag = (
+  line: string,
+  startIndex: number,
+  dontSearchAfterIndex: number
+): QuoteExtraTagValues | undefined => {
   if (line[startIndex] !== '[') {
     return
   }

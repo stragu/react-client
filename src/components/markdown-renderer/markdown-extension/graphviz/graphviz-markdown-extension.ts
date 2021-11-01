@@ -7,7 +7,7 @@
 import { MarkdownExtension } from '../markdown-extension'
 import { CodeBlockComponentReplacer } from '../../replace-components/code-block-component-replacer'
 import type { ComponentReplacer } from '../../replace-components/component-replacer'
-import {GraphvizFrame} from './graphviz-frame'
+import { GraphvizFrame } from './graphviz-frame'
 
 export class GraphvizMarkdownExtension extends MarkdownExtension {
   public buildReplacers(): ComponentReplacer[] {

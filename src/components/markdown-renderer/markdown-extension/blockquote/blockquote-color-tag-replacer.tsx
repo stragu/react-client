@@ -13,7 +13,6 @@ import { cssColor } from './colored-blockquote-node-preprocessor'
 import Optional from 'optional-js'
 import type { Text } from 'domhandler/lib/node'
 
-
 /**
  * Replaces <blockquote-tag> elements with "color" as label and a valid color as content
  * with an colored label icon.

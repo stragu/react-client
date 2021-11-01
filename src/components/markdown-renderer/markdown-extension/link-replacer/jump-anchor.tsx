@@ -11,12 +11,14 @@ export interface JumpAnchorProps extends AllHTMLAttributes<HTMLAnchorElement> {
   jumpTargetId: string
 }
 
-
 export const JumpAnchor: React.FC<JumpAnchorProps> = ({ jumpTargetId, children, ...props }) => {
-  const jumpToTargetId = useCallback((event: React.MouseEvent<HTMLElement, MouseEvent>): void => {
-    document.getElementById(jumpTargetId)?.scrollIntoView({ behavior: 'smooth' })
-    event.preventDefault()
-  }, [jumpTargetId])
+  const jumpToTargetId = useCallback(
+    (event: React.MouseEvent<HTMLElement, MouseEvent>): void => {
+      document.getElementById(jumpTargetId)?.scrollIntoView({ behavior: 'smooth' })
+      event.preventDefault()
+    },
+    [jumpTargetId]
+  )
 
   return (
     <a {...props} onClick={jumpToTargetId}>

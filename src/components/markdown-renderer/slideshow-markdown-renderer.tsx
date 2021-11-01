@@ -69,7 +69,6 @@ export const SlideshowMarkdownRenderer: React.FC<SlideshowMarkdownRendererProps 
   const tocAst = useRef<TocAst>()
   const [trimmedContent, contentExceedsLimit] = useTrimmedContent(content)
 
-
   const extensions = useMemo(
     () => [
       new TableOfContentsMarkdownExtension(onTocChange),

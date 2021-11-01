@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import type {Document} from 'domhandler'
+import type { Document } from 'domhandler'
 
 export abstract class NodeProcessor {
   public abstract process(nodes: Document): Document

@@ -25,7 +25,7 @@ export class JumpAnchorReplacer extends ComponentReplacer {
     if (replacement === null || typeof replacement === 'string') {
       return replacement
     } else {
-      return <JumpAnchor { ...replacement.props as AllHTMLAttributes<HTMLAnchorElement> } jumpTargetId={ jumpId } />
+      return <JumpAnchor {...(replacement.props as AllHTMLAttributes<HTMLAnchorElement>)} jumpTargetId={jumpId} />
     }
   }
 }

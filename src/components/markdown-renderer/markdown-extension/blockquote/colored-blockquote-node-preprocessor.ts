@@ -15,14 +15,13 @@ export class ColoredBlockquoteNodePreprocessor extends TravelerNodeProcessor {
       return
     }
 
-    Optional.ofNullable(findBlockquoteColorDefinitionAndParent(node.children))
-            .ifPresent(([color, parentParagraph]) => {
-              removeColorDefinitionsFromParagraph(parentParagraph)
-              if (!cssColor.test(color)) {
-                return
-              }
-              setLeftBorderColor(node, color)
-            })
+    Optional.ofNullable(findBlockquoteColorDefinitionAndParent(node.children)).ifPresent(([color, parentParagraph]) => {
+      removeColorDefinitionsFromParagraph(parentParagraph)
+      if (!cssColor.test(color)) {
+        return
+      }
+      setLeftBorderColor(node, color)
+    })
   }
 }
 
@@ -71,7 +70,12 @@ const findBlockquoteColorDefinitionAndParent = (
  * @return true if the checked node is a blockquote color definition
  */
 const extractBlockquoteColorDefinition = (element: Element): string | undefined => {
-  if (element.name === 'blockquote-tag' && element.attribs['data-label'] === 'color' && element.children.length === 1 && isText(element.children[0])) {
+  if (
+    element.name === 'blockquote-tag' &&
+    element.attribs['data-label'] === 'color' &&
+    element.children.length === 1 &&
+    isText(element.children[0])
+  ) {
     return element.children[0].data
   }
 }
@@ -92,5 +96,5 @@ const removeColorDefinitionsFromParagraph = (paragraph: Element): void => {
  * @param color The border color
  */
 const setLeftBorderColor = (element: Element, color: string): void => {
-  element.attribs = Object.assign(element.attribs || {}, { style: `border-left-color: ${ color };` })
+  element.attribs = Object.assign(element.attribs || {}, { style: `border-left-color: ${color};` })
 }

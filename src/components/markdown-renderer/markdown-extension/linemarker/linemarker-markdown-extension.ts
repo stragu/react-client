@@ -17,7 +17,7 @@ export class LinemarkerMarkdownExtension extends MarkdownExtension {
   }
 
   public configureMarkdownIt(markdownIt: MarkdownIt): void {
-    addLineMarkerMarkdownItPlugin(markdownIt, this.lineOffset ?? 0,  this.onLineMarkers)
+    addLineMarkerMarkdownItPlugin(markdownIt, this.lineOffset ?? 0, this.onLineMarkers)
   }
 
   public buildReplacers(): ComponentReplacer[] {
