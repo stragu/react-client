@@ -48,7 +48,6 @@ import { LinkifyFixMarkdownExtension } from './markdown-extension/linkify-fix-ma
 import { DebuggerMarkdownExtension } from './markdown-extension/debugger-markdown-extension'
 import { RevealMarkdownExtension } from './markdown-extension/reveal-markdown-extension'
 import { LinkAdjustmentMarkdownExtension } from './markdown-extension/link-adjustment-markdown-extension'
-import { HeadlineAnchorsMarkdownExtension } from './markdown-extension/headline-anchors-markdown-extension'
 
 export interface SlideshowMarkdownRendererProps extends CommonMarkdownRendererProps {
   slideOptions: SlideOptions
