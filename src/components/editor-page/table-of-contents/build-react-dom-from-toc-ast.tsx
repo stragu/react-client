@@ -9,7 +9,7 @@ import type { ReactElement } from 'react'
 import React, { Fragment } from 'react'
 import { ShowIf } from '../../common/show-if/show-if'
 import { tocSlugify } from './toc-slugify'
-import { JumpAnchor } from '../../markdown-renderer/replace-components/link-replacer/jump-anchor'
+import { JumpAnchor } from '../../markdown-renderer/markdown-extension/link-replacer/jump-anchor'
 
 export const buildReactDomFromTocAst = (
   toc: TocAst,

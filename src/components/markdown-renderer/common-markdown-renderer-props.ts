@@ -5,7 +5,7 @@
  */
 
 import type { TocAst } from 'markdown-it-toc-done-right'
-import type { ImageClickHandler } from './replace-components/image/image-replacer'
+import type { ImageClickHandler } from './markdown-extension/image/proxy-image-replacer'
 import type { Ref } from 'react'
 
 export interface CommonMarkdownRendererProps {
