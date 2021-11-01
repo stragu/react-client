@@ -13,8 +13,6 @@ export const legacySlideshareShortCode: MarkdownIt.PluginSimple = (markdownIt) =
   markdownItRegex(markdownIt, {
     name: 'legacy-slideshare-short-code',
     regex: finalRegex,
-    replace: (match: string) => {
-      return `<a href="https://www.slideshare.net/${match}">https://www.slideshare.net/${match}</a>`
-    }
+    replace: (match: string) => `<a href='https://www.slideshare.net/${match}'>https://www.slideshare.net/${match}</a>`
   })
 }

@@ -12,21 +12,18 @@ export interface LineMarkers {
   endLine: number
 }
 
-export type LineNumberMarkerOptions = (lineMarkers: LineMarkers[]) => void
-
 /**
  * This plugin adds markers to the dom, that are used to map line numbers to dom elements.
  * It also provides a list of line numbers for the top level dom elements.
  */
-export const lineNumberMarker: (options: LineNumberMarkerOptions, lineOffset: number) => MarkdownIt.PluginSimple =
-  (options, lineOffset = 0) =>
-  (md: MarkdownIt) => {
+export const lineNumberMarker: (markdownIt: MarkdownIt, lineOffset: number, onLineMarkerChange?: (lineMarkers: LineMarkers[]) => void) => void =
+  (md: MarkdownIt, lineOffset , onLineMarkerChange) => {
     // add app_linemarker token before each opening or self-closing level-0 tag
     md.core.ruler.push('line_number_marker', (state) => {
       const lineMarkers: LineMarkers[] = []
       tagTokens(state.tokens, lineMarkers, lineOffset)
-      if (options) {
-        options(lineMarkers)
+      if (onLineMarkerChange) {
+        onLineMarkerChange(lineMarkers)
       }
       return true
     })

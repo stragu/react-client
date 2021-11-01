@@ -21,14 +21,7 @@ export interface BlockquoteTagOptions {
 export class BlockquoteTagMarkdownItPlugin {
   constructor(private tagName: string, private icon: IconName) {}
 
-  public createMarkdownItPlugin(): MarkdownIt.PluginSimple {
-    return (markdownIt) => {
-      this.registerRenderer(markdownIt)
-      this.registerInlineRule(markdownIt)
-    }
-  }
-
-  private registerRenderer(markdownIt: MarkdownIt): void {
+  public static registerRenderer(markdownIt: MarkdownIt): void {
     if (markdownIt.renderer.rules['blockquote_tag']) {
       return
     }
@@ -45,7 +38,7 @@ export class BlockquoteTagMarkdownItPlugin {
     }
   }
 
-  private registerInlineRule(markdownIt: MarkdownIt): void {
+  public registerInlineRule(markdownIt: MarkdownIt): void {
     markdownIt.inline.ruler.before('link', `blockquote_${this.tagName}`, (state) =>
       this.parseSpecificBlockquoteTag(state)
         .map((parseResults) => {

@@ -6,8 +6,6 @@
 
 import type { Element } from 'domhandler'
 import { isTag } from 'domhandler'
-import type MarkdownIt from 'markdown-it'
-import mathJax from 'markdown-it-mathjax'
 import React from 'react'
 import { ComponentReplacer, DO_NOT_REPLACE } from '../component-replacer'
 import './katex.scss'
@@ -44,15 +42,6 @@ const KaTeX = React.lazy(() => import(/* webpackChunkName: "katex" */ '@matejmaz
  * Detects LaTeX syntax and renders it with KaTeX.
  */
 export class KatexReplacer extends ComponentReplacer {
-  public static readonly markdownItPlugin: MarkdownIt.PluginSimple = mathJax({
-    beforeMath: '<app-katex>',
-    afterMath: '</app-katex>',
-    beforeInlineMath: '<app-katex data-inline="true">',
-    afterInlineMath: '</app-katex>',
-    beforeDisplayMath: '<app-katex>',
-    afterDisplayMath: '</app-katex>'
-  })
-
   public replace(node: Element): React.ReactElement | undefined {
     if (!(isKatexTag(node, true) || containsKatexBlock(node)) || node.children?.[0] === undefined) {
       return DO_NOT_REPLACE

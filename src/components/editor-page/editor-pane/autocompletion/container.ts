@@ -6,7 +6,6 @@
 
 import type { Editor, Hint, Hints } from 'codemirror'
 import { Pos } from 'codemirror'
-import { validAlertLevels } from '../../../markdown-renderer/markdown-it-plugins/alert-container'
 import type { Hinter } from './index'
 import { findWordAtCursor } from './index'
 
@@ -15,7 +14,7 @@ const spoilerSuggestion: Hint = {
   text: ':::spoiler Toggle label\nToggled content\n::: \n',
   displayText: 'spoiler'
 }
-const suggestions = validAlertLevels
+const suggestions = ['success', 'danger', 'info', 'warning']
   .map(
     (suggestion: string): Hint => ({
       text: ':::' + suggestion + '\n\n::: \n',

@@ -9,7 +9,6 @@ import { DocumentLengthLimitReachedAlert } from './document-length-limit-reached
 import { useConvertMarkdownToReactDom } from './hooks/use-convert-markdown-to-react-dom'
 import './markdown-renderer.scss'
 import type { LineMarkerPosition } from './types'
-import { useComponentReplacers } from './hooks/use-component-replacers'
 import { useTranslation } from 'react-i18next'
 import type { LineMarkers } from './replace-components/linemarker/line-number-marker'
 import { useCalculateLineMarkerPosition } from './utils/calculate-line-marker-positions'
@@ -18,8 +17,36 @@ import type { TocAst } from 'markdown-it-toc-done-right'
 import { useOnRefChange } from './hooks/use-on-ref-change'
 import { useTrimmedContent } from './hooks/use-trimmed-content'
 import type { CommonMarkdownRendererProps } from './common-markdown-renderer-props'
-import { DocumentMarkdownItConfigurator } from './markdown-it-configurator/document-markdown-it-configurator'
-import { useNodePreprocessors } from './hooks/use-node-preprocessors'
+import { LinemarkerMarkdownExtension } from './markdown-extension/linemarker-markdown-extension'
+import { GistMarkdownExtension } from './markdown-extension/gist-markdown-extension'
+import { YoutubeMarkdownExtension } from './markdown-extension/youtube-markdown-extension'
+import { VimeoMarkdownExtension } from './markdown-extension/vimeo-markdown-extension'
+import { AsciinemaMarkdownExtension } from './markdown-extension/asciinema-markdown-extension'
+import { ProxyImageMarkdownExtension } from './markdown-extension/proxy-image-markdown-extension'
+import { CsvTableMarkdownExtension } from './markdown-extension/csv-table-markdown-extension'
+import { AbcjsMarkdownExtension } from './markdown-extension/abcjs-markdown-extension'
+import { SequenceDiagramMarkdownExtension } from './markdown-extension/sequence-diagram-markdown-extension'
+import { FlowchartMarkdownExtension } from './markdown-extension/flowchart-markdown-extension'
+import { MermaidMarkdownExtension } from './markdown-extension/mermaid-markdown-extension'
+import { GraphvizMarkdownExtension } from './markdown-extension/graphviz-markdown-extension'
+import { MarkmapMarkdownExtension } from './markdown-extension/markmap-markdown-extension'
+import { VegaLiteMarkdownExtension } from './markdown-extension/vega-lite-markdown-extension'
+import { BlockquoteMarkdownExtension } from './markdown-extension/blockquote-markdown-extension'
+import { HighlightedCodeMarkdownExtension } from './markdown-extension/highlighted-code-markdown-extension'
+import { KatexMarkdownExtension } from './markdown-extension/katex-markdown-extension'
+import { TaskListsMarkdownExtension } from './markdown-extension/task-lists-markdown-extension'
+import { HeadlineAnchorsMarkdownExtension } from './markdown-extension/headline-anchors-markdown-extension'
+import { PlantumlMarkdownExtension } from './markdown-extension/plantuml-markdown-extension'
+import { LegacyShortcodesMarkdownExtension } from './markdown-extension/legacy-shortcodes-markdown-extension'
+import { TableOfContentsMarkdownExtension } from './markdown-extension/table-of-contents-markdown-extension'
+import { EmojiMarkdownExtension } from './markdown-extension/emoji-markdown-extension'
+import { GenericSyntaxMarkdownExtension } from './markdown-extension/generic-syntax-markdown-extension'
+import { AlertMarkdownExtension } from './markdown-extension/alert-markdown-extension'
+import { SpoilerMarkdownExtension } from './markdown-extension/spoiler-markdown-extension'
+import { store } from '../../redux'
+import { LinkifyFixMarkdownExtension } from './markdown-extension/linkify-fix-markdown-extension'
+import { DebuggerMarkdownExtension } from './markdown-extension/debugger-markdown-extension'
+import { LinkAdjustmentMarkdownExtension } from './markdown-extension/link-adjustment-markdown-extension'
 
 export interface DocumentMarkdownRendererProps extends CommonMarkdownRendererProps {
   onLineMarkerPositionChanged?: (lineMarkerPosition: LineMarkerPosition[]) => void
@@ -43,22 +70,40 @@ export const DocumentMarkdownRenderer: React.FC<DocumentMarkdownRendererProps> =
   const tocAst = useRef<TocAst>()
   const [trimmedContent, contentExceedsLimit] = useTrimmedContent(content)
 
-  const markdownIt = useMemo(
-    () =>
-      new DocumentMarkdownItConfigurator({
-        onTocChange: (toc) => (tocAst.current = toc),
-        onLineMarkers:
-          onLineMarkerPositionChanged === undefined
-            ? undefined
-            : (lineMarkers) => (currentLineMarkers.current = lineMarkers),
-        useAlternativeBreaks,
-        lineOffset
-      }).buildConfiguredMarkdownIt(),
-    [onLineMarkerPositionChanged, useAlternativeBreaks, lineOffset]
-  )
-  const replacers = useComponentReplacers(onTaskCheckedChange, onImageClick, lineOffset)
-  const nodePreprocessor = useNodePreprocessors(baseUrl)
-  const markdownReactDom = useConvertMarkdownToReactDom(trimmedContent, markdownIt, replacers, nodePreprocessor)
+  const extensions = useMemo(() => {
+    return [
+      new TableOfContentsMarkdownExtension(onTocChange),
+      new HeadlineAnchorsMarkdownExtension(),
+      new VegaLiteMarkdownExtension(),
+      new MarkmapMarkdownExtension(),
+      new LinemarkerMarkdownExtension((lineMarkers) => (currentLineMarkers.current = lineMarkers), lineOffset),
+      new GistMarkdownExtension(),
+      new YoutubeMarkdownExtension(),
+      new VimeoMarkdownExtension(),
+      new AsciinemaMarkdownExtension(),
+      new ProxyImageMarkdownExtension(onImageClick),
+      new CsvTableMarkdownExtension(),
+      new AbcjsMarkdownExtension(),
+      new SequenceDiagramMarkdownExtension(),
+      new FlowchartMarkdownExtension(),
+      new MermaidMarkdownExtension(),
+      new GraphvizMarkdownExtension(),
+      new BlockquoteMarkdownExtension(),
+      new LinkAdjustmentMarkdownExtension(baseUrl),
+      new KatexMarkdownExtension(),
+      new TaskListsMarkdownExtension(lineOffset, onTaskCheckedChange),
+      new PlantumlMarkdownExtension(store.getState().config.plantumlServer),
+      new LegacyShortcodesMarkdownExtension(),
+      new EmojiMarkdownExtension(),
+      new GenericSyntaxMarkdownExtension(),
+      new AlertMarkdownExtension(),
+      new SpoilerMarkdownExtension(),
+      new LinkifyFixMarkdownExtension(),
+      new DebuggerMarkdownExtension(),
+      new HighlightedCodeMarkdownExtension()
+    ]
+  }, [baseUrl, lineOffset, onImageClick, onTaskCheckedChange, onTocChange])
+  const markdownReactDom = useConvertMarkdownToReactDom(trimmedContent, extensions, useAlternativeBreaks)
 
   useTranslation()
   useCalculateLineMarkerPosition(
